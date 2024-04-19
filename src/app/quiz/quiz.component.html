@@ -1,0 +1,46 @@
+<!-- Einbindung von Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- Container mit flexibler Ausrichtung -->
+<div class="container">
+  <div class="relative-element">
+  <!-- Quiz-Container -->
+  <div *ngIf="!quizAbgeschlossen" id="quiz-container" class="card">
+    <div class="card-header">
+      <!-- Anzeige der Frage-Nummer -->
+      <div id="Fragennummer"><h2>Frage: {{ ladeFragenNummer() }}</h2></div>
+      <!-- Anzeige der aktuellen Frage -->
+      <div id="Frage"><p>{{ aktuelleFrage }}</p></div>
+    </div>
+    <!-- Auswahlmöglichkeiten für die Frage -->
+    <div class="card-body" >
+      <div id="antwort" *ngFor="let antwort of (aktuelleAntwort); let i = index">
+        <!-- Button für jede Antwortmöglichkeit -->
+        <button class="btn btn-outline-secondary me-auto col-6 border border-white" (click)="pruefeAntwort(i)">{{ antwort }}</button>
+      </div>
+    </div>
+    <!-- Button für das Überspringen zur nächsten Frage -->
+    <div class="card-footer">
+      <button id="skipFrage" class="btn btn-warning" (click)="nextFrage()"[disabled]="skipRunde">Nächste Frage</button>
+    </div>
+  </div>
+</div>
+  <!-- Ergebnis-Anzeige -->
+  <div id="result" *ngIf="quizAbgeschlossen" class="card">
+    <div class="card-header">
+      <!-- Überschrift für das Ergebnis -->
+      <h1>Geschafft!!!</h1>
+      <h2>Danke fürs Teilnehmen</h2>
+    </div>
+    <!-- Anzeige der Punktzahl -->
+    <div class="card-body">
+      <p>Du hast {{ punktzahl }} von {{ fragen.length }} Fragen richtig beantwortet.</p>
+    </div>
+    <!-- Button zum Neustarten des Quiz -->
+    <div class="card-footer">
+      <button id="neustart" class="btn btn-outline-dark" (click)="neustart()">RESTART</button>
+    </div>
+  </div>
+
+</div>
