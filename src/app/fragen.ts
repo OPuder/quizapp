@@ -1,6 +1,6 @@
-export interface Fragen {
-    question: string;       // Die Frage selbst
-    answers: string[];      // Array von Antwortmöglichkeiten
-    correctAnswer: number;  // Index der korrekten Antwort
-    skipped: boolean;       // Boolean, ob die Frage übersprungen wurde
-  }
+export interface Fragen {              // Exportierte Schnittstelle Fragen für die Frage-Objekte
+  frage: string;                       // Die Frage selbst als Zeichenkette
+  antwort: string[];                   // Ein Array von Antwortmöglichkeiten als Zeichenketten
+  correctAntwort: number;              // Der Index der korrekten Antwort im Antwort-Array
+  skip: boolean;                       // Ein Boolean-Wert, der angibt, ob die Frage übersprungen wurde
+}

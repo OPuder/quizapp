@@ -1,51 +1,49 @@
-import { Injectable } from '@angular/core';
-import { Fragen } from './fragen';
+import { Injectable } from '@angular/core';                                                          // Import des Injectable-Dekorators aus dem Angular-Core
+import { Fragen } from './fragen';                                                                   // Import der Fragen-Schnittstelle aus dem Fragen-Modul
 
-@Injectable({
-  providedIn: 'root'
+@Injectable({                                                                                        // Dekorator, der angibt, dass die Klasse als Injectable markiert ist
+  providedIn: 'root'                                                                                 // Das Injectable wird im Root-Injektor bereitgestellt, was bedeutet, dass es überall in der Anwendung verfügbar ist
 })
-export class FragenArrayService {
-  [x: string]: any;
-  fragenArray: Fragen[] = [
+
+export class FragenArrayService {                                                                    // Exportierte Klasse FragenArrayService für den Service, der Fragen verwaltet
+  fragenArray: Fragen[] = [                                                                          // Array mit Fragen-Objekten
     {
-      question: "Wie deklariere ich eine Variable in JavaScript (JS)?",     // Die Frage als String
-      answers: ["let", "Get", "set", "LETT"],                               // Die Antworten als Array
-      correctAnswer: 0,                                                     // Die richtige Antwort aus dem Antwortarray als Zahl (number)
-      skipped: false                                                        // Die Abfrage ob diese Frage schon Übersprungen wurde Boolean 
-    },                                                                      //            (kann nur true (Wahr) oder false (Falsch) sein )
-    {
-      question: "Wie erstelle ich eine Funktion in JavaScript?",
-      answers: ["function()", "func()", "createFunction()", "functionName()"],
-      correctAnswer: 0,
-      skipped: false
+      frage: "Wie deklariere ich eine Variable in JavaScript (JS)?",                                 // Die Frage als Zeichenkette
+      antwort: ["let", "Get", "set", "LETT"],                                                        // Ein Array von Antwortmöglichkeiten als Zeichenketten
+      correctAntwort: 0,                                                                             // Der Index der korrekten Antwort im Antwort-Array
+      skip: false                                                                                    // Ein Boolean-Wert, der angibt, ob die Frage übersprungen wurde
     },
-    {
-      question: "Wie verhindere ich, dass eine Funktion Werte zurückgibt?",
-      answers: ["return;", "void;", "null;", "stopReturn;"],
-      correctAnswer: 1,
-      skipped: false
-    },
-    {
-      question: "Welcher Operator wird verwendet, um Gleichheit in JavaScript zu prüfen?",
-      answers: ["==", "===", "=", "!="],
-      correctAnswer: 1,
-      skipped: false
-    }
-  ];
 
-
-
-  getFrageByPosition(position: number): Fragen {                            // Methode, um eine einzelne Frage aus dem Array zurückzugeben
-    return this.fragenArray[position];                                      //        Position === Index
-  }
-  
-  getFragen(): Fragen[] {                                                   // Die Reihnfolge wie im Originalen Array
-    return this.fragenArray;
-  }
-
- getRandomFragen(): Fragen[] {                                              // Zufällige Ausgabe der Fragen
-    const randomFragenArray = [...this.fragenArray];                        // Stabile Kopie des Fragen-Arrays erstellen
-    randomFragenArray.sort(() => Math.random() - 0.5);                      // Das Array mischen, um die Fragen in zufälliger Reihenfolge anzuzeigen
-    return randomFragenArray;                                               // Rückgabe des gemischten und neu nummerierten Arrays
-  }
+{
+    frage: " Welche Kammer wir für ein Array genommen?",
+    antwort: ["()", "{}", "[]", "keine"],
+    correctAntwort: 2,
+    skip: false
+},
+{
+    frage: "Was ist die erste Nummer in einen Array?",
+    antwort: ["6", "1", "10", "0"],
+    correctAntwort: 3,
+    skip: false
+},
+{
+    frage: "Sind Javascript und Typscript das gleiche?",
+    antwort: ["Nein", "Ähnlich", "Ja", "Egal"],
+    correctAntwort: 1,
+    skip: false
+},
+];
+constructor() { }
+getFrage() {                                                                                         // Methode, um alle Fragen zurückzugeben
+  return this.fragenArray;                                                                           // Rückgabe des Arrays mit Fragen
 }
+
+
+getRandomFrage(): Fragen[] {                                                                         // Zufällige Ausgabe der Fragen
+  const randomFragenArray = [...this.fragenArray];                                                   // Stabile Kopie des Fragen-Arrays erstellen
+  randomFragenArray.sort(() => Math.random() - 0.5);                                                 // Das Array mischen, um die Fragen in zufälliger Reihenfolge anzuzeigen
+  return randomFragenArray;                                                                          // Rückgabe des gemischten und neu nummerierten Arrays
+  }  
+}
+
+
