@@ -26,22 +26,3 @@
     </div>
   </div>
 </div>  <!-- Ergebnis-Anzeige -->
-<div id="result" *ngIf="quizAbgeschlossen" class="card">
-  <div class="card-header">
-
-    <!-- Überschrift für das Ergebnis -->
-    <h1>Geschafft!!!</h1>
-    <h2>Danke fürs Teilnehmen</h2>
-  </div>
-
-  <!-- Anzeige der Punktzahl -->
-  <div class="card-body">
-    <p>Du hast {{ punktzahl }} von {{ Fragen.length }} Fragen richtig beantwortet.</p>
-  </div>
-
-  <!-- Button zum Neustarten des Quiz -->
-  <div class="card-footer">
-    <button id="neustart" class="btn btn-outline-dark" (click)="neustart()">RESTART</button>
-  </div>
-</div>
-</div>

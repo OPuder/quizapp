@@ -1,0 +1,28 @@
+/* Allgemeine Styles für den Quiz-Container */
+.container {
+    display: flex;                  /* Flexbox-Layout verwenden */
+    justify-content: flex-start;    /* Elemente links ausrichten */
+    align-items: center;            /* Zentrierte vertikale Ausrichtung */
+    padding: 1px;                   /* Abstand um den Container herum */
+    margin-right: 20px;
+    flex: 0 0 200px;                /* Flex-Eigenschaften: Kein Wachstum, Schrumpfen erlauben, automatische Basisbreite */
+  }
+  
+  .card-header {
+      text-align: center;           /* Zentrierte Textausrichtung */
+      padding: 1.5rem;              /* Innenabstand */
+      background-color: #f8f9fa;  /* Hintergrundfarbe */
+    }
+  .card-body {
+      text-align: center;           /* Zentrierte Textausrichtung */
+    }
+  .card-footer {
+      text-align: end;              /* Zentrierte Textausrichtung */
+      padding: 1.5rem;              /* Innenabstand */
+      background-color: #f8f9fa;  /* Hintergrundfarbe */
+    }
+  .relative-element {
+      position: relative;             /* Positionierung relativ zum normalen Fluss */
+      left: -20px;                   /* Verschieben Sie das Element um 20 Pixel nach links */
+    }
+  

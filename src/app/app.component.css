@@ -1,3 +1,75 @@
+#background {
+  background-color: #ffffff;
+  }
+
+  #menu li{
+    margin-right: 1.675cm;
+  }
+
+  #dropdown-menu li{
+  margin-left: 20px;
+  }
+
+.left-side {
+  left: -20px !important;
+  }
+  /* Stile für ein Quiz-Element */
+  .Quiz {
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+  max-width: 1000px; /* Optional: Begrenze die maximale Breite des Elements */
+  }
+  
+  #zufalls {
+  margin-top: 20px;
+  }
+  .container{
+    flex: 0 0 200px; /* Flex-Eigenschaften: Kein Wachstum, Schrumpfen erlauben, automatische Basisbreite */
+  }
+  
+  /* Grundlegender Stil */
+  nav {
+    background-color: #a4a2a2;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  nav ul {
+    list-style-type: none;;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    position: relative;
+  }
+  
+  nav ul li a { /*Drop down Part */
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Dropdown-Menü Stil */
+  
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+  }
+  /* Zeigt das Dropdown-Menü beim Überfahren */
+  .dropdown:hover .dropdown-menu {
+    display: flex;
+  }
+  /* Stil-Anpassungen für Hover-Zustand */
+  nav ul li a:hover, .dropdown:hover > a {
+    background-color: #a4a2a2;
+  }
+
 /* Definition benutzerdefinierter Farbvariablen für das aktuelle Element oder die aktuelle Komponente */
 :host {
   --bright-blue: oklch(51.01% 0.274 263.83); /* Helles Blau */
@@ -65,8 +137,9 @@ main {
 }
 
 /* Stile für das Logo */
-.angular-logo {
-  max-width: 9.2rem;
+.angular-logo {              /* Stile für das Logo*/
+  max-width: 9.375rem;
+ margin-left: 25px;
 }
 
 /* Stile für den Inhaltsbereich */
@@ -178,46 +251,4 @@ main {
     background: var(--red-to-pink-to-purple-horizontal-gradient);
     margin-block: 1.5rem;
 }
-}
-
-/* Stile für ein Quiz-Element */
-.Quiz {
-margin: 0 auto;
-align-items: center;
-text-align: center;
-max-width: 1000px; /* Optional: Begrenze die maximale Breite des Elements */
-}
-nav {
-  background-color: #a4a2a2;
-  border-radius: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-nav ul li {
-  display: inline;
-}
-
-nav ul li a {
-  display: inline-block;
-  padding: 20px;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-}
-
-nav ul li a:hover {
-  background-color: #555;
-}
-#zufalls {
-margin-top: 20px;
-}
-.container{
-  flex: 0 0 200px; /* Flex-Eigenschaften: Kein Wachstum, Schrumpfen erlauben, automatische Basisbreite */
 }

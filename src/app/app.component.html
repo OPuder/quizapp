@@ -1,24 +1,26 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<div class="Quiz">
-  <h1>Willkommen auf einer Quizseite zum Lernen von JavaScript, TypeScript und Angular</h1>
-  <nav>
-    <ul>
-        <li><a href="http://localhost:4200/">Start</a></li>
-        <li><a href="#">Quiz Auswahl</a></li>
-        <li><a href="#">Score</a></li>
-        <li><a href="#">Kontakt</a></li>
-    </ul>
-</nav>
-</div>
-<main class="main">
-  <div class="content">
+
+<main class="main" id="background">
+  <div class="Quiz">
+    <h1>Willkommen auf einer Quizseite zum Lernen von JavaScript, TypeScript und Angular</h1>
+    <nav>
+      <ul id="menu">
+          <li><a href="http://localhost:4200/">Start</a></li>
+                  <li><a href="#">Wissenswertes</a></li>
+          <li class="dropdown">
+            <a href="#">Quiz Auswahl</a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/app-quiz" routerLinkActive="active"(click)="toggleStartSeite($event)">JavaScript</a></li>
+                <li><a href="#">TypeScript</a></li>
+                <li><a href="#">Angular</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Scoreboard</a></li>
+          <li><a href="#">Kontakt</a></li>
+      </ul>
+  </nav>
+
+  <div class="content" *ngIf="startSeite">
     <div class="left-side">
       <div class="test"  *ngIf="!showQuiz">
       <h1>let's {{ title }}</h1>
@@ -26,7 +28,7 @@
       <p>Dann taucht ein Quiz auf. Bist du bereit? </p>
       <button id="zufalls" type="button" (click)="toggleQuiz($event)">Zufalls Quiz 🎉</button>
     </div>
-    <app-quiz *ngIf="showQuiz" class="Quizapp"></app-quiz>
+    <app-quiz-Snipped *ngIf="showQuiz" class="Quizapp"></app-quiz-Snipped>
   </div>
    <div class="divider" role="separator" aria-label="Divider"></div>
    <div class="letf-middel-side">
@@ -370,13 +372,7 @@
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
 </div>
+</div>
 </main>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <router-outlet></router-outlet>
