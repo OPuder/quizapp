@@ -1,6 +1,11 @@
 /* Allgemeine Styles für den Quiz-Container */
+.relative-element{
+  display: flex;
+margin-left: 5.25cm;
+}
 .container {
   display: flex;                  /* Flexbox-Layout verwenden */
+  text-align: center;            /* Zentrierte Textausrichtung */
   justify-content: flex-start;    /* Elemente links ausrichten */
   align-items: center;            /* Zentrierte vertikale Ausrichtung */
   padding: 1px;                   /* Abstand um den Container herum */

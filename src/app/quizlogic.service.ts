@@ -1,42 +1,43 @@
-import { Component, OnInit } from '@angular/core';                                             // Import von Component und OnInit aus dem Angular-Core
-import { Fragen } from '../fragen';                                                            // Import der Fragen-Schnittstelle aus dem Fragen-Modul
-import { FragenArrayService } from '../fragen-array.service';                                  // Import des FragenArrayService aus dem Fragen-Array-Service
-import { CommonModule } from '@angular/common';                                                // Import des CommonModule aus Angular für die gemeinsame Verwendung
+import { Injectable } from '@angular/core';
+import { Fragen } from './fragen';
+import { FragenArrayService } from './fragen-array.service';
 
-
-
-
-@Component({
-  selector: 'app-quiz',                                                                        // Der Selctor Name zum Aufrufen der Komponente 
-  standalone: true,                                                                            // Standalone True oder False bestimmt ob sie eine Module und Routing Datei / Pfad brauch
-  imports: [CommonModule,],                                                                    // Einbindung des CommonModule
-  templateUrl: './quiz.component.html',                                                        // Pfad zur HTML-Datei für das Template
-  styleUrl: './quiz.component.css'                                                             // Pfad zur CSS-Datei für das Styling
+@Injectable({
+  providedIn: 'root'
 })
-export class QuizComponent implements OnInit {
+export class QuizlogicService {
 
-  Fragen: Fragen[] = [];                                                                       // Array für Fragen-Objekte, speichert alle Fragen des Quiz
-  unbeantworteteFragen: Fragen[] = [];                                                         // Array für unbeantwortete Fragen, die der Benutzer noch nicht beantwortet hat
-  quizAbgeschlossen: boolean = false;                                                          // Boolean-Wert, der angibt, ob das Quiz abgeschlossen ist
-  skipRunde: boolean = false;                                                                  // Boolean-Wert, der angibt, ob Fragen übersprungen wurden
-  punktzahl: number = 0;                                                                       // Die Punktzahl des Benutzers, wird aktualisiert, wenn der Benutzer Fragen richtig beantwortet
-  aktuelleFrageIndex: number = 0;                                                              // Index der aktuellen Frage im Fragen-Array
-  skipFragenIndex: number = 0;                                                                 // Index für übersprungene Fragen im uebersprungeneFragen-Array
-  antwortIndex: number = 0;                                                                    // Index für die ausgewählte Antwort in der aktuelleAntwort
-  aktuelleAntwort: string[] = [];                                                              // Array für die aktuelle Antwort des Benutzers
-  skipAntwort: string[] = [];                                                                  // Array für übersprungene Antworten
-  aktuelleFrage: string = "";                                                                  // Der Text der aktuellen Frage, der in der Benutzeroberfläche angezeigt wird
-  skipFrage: string = "";                                                                      // Der Text der übersprungenen Frage, die in der Benutzeroberfläche angezeigt wird
-  
-  constructor(private fragenArrayService: FragenArrayService) {                                // Konstruktor der QuizComponent-Klasse, der den FragenArrayService als Abhängigkeit injiziert
-    this.Fragen = this.fragenArrayService.getRandomFrage();                                    // Abrufen der Fragen vom FragenArrayService und Zuweisen an die Fragen-Variable der Komponente
-    //console.log ("Random Fragen", this.Fragen);                                                // Ausgabe der Fragen in der Konsole zur Überprüfung
+  Fragen: Fragen[] = [];
+  unbeantworteteFragen: Fragen[] = [];
+  quizAbgeschlossen: boolean = false;
+  skipRunde: boolean = false;
+  punktzahl: number = 0;
+  aktuelleFrageIndex: number = 0;
+  skipFragenIndex: number = 0;
+  antwortIndex: number = 0;
+  aktuelleAntwort: string[] = [];
+  skipAntwort: string[] = [];
+  aktuelleFrage: string = "";
+  skipFrage: string = "";
+  JSRLFragen: Fragen[];       // JSRL = JavaScript Random Fragen Leicht
+  Snipped: Fragen[];          // Snipped = Snipped Fragen
+
+    constructor(private fragenArrayService: FragenArrayService) {
+    this.Fragen = this.fragenArrayService.getSnippedFrage(); //  TODO: test array
+    this.JSRLFragen= this.fragenArrayService.getRandomFrage();
+    this.Snipped = this.fragenArrayService.getSnippedFrage();
   }
-  ngOnInit(): void {                                                                           // Lifecycle-Hook: Wird beim Initialisieren der Komponente aufgerufen
-    this.ladeFrage();                                                                          // Methode aufrufen, um eine Frage zu laden, wenn die Komponente initialisiert wird
-    this.neustart();                                                                           // Methode aufrufen, um das Quiz zu neustarten, wenn die Komponente initialisiert wird
-  
+  initializeQuiz() {
+    this.aktuelleFrageIndex = 0;
+    this.skipFragenIndex = 0;
+    this.punktzahl = 0;
+    this.quizAbgeschlossen = false;
+    this.skipRunde = false;
+    this.unbeantworteteFragen = [];
+    this.ladeFrage();
+    console.log(this.initializeQuiz); 
   }
+
   ladeFrage() {                                                                                // Methode zum Laden der Fragen
     try {
       //this.Fragen = this.fragenArrayService.getFrage();                                        // Abrufen der Fragen vom Service über die getFragen() 
@@ -57,13 +58,12 @@ export class QuizComponent implements OnInit {
   }
   fragenNummer(): number | string {                                                                     // Methode zum Abrufen der aktuellen Fragennummer
      try {
-      const gesamtanzahlFragen = this.Fragen.length;          // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
-      const aktuelleFragennummer = this.aktuelleFrageIndex ;                                  // aktuelle Fragennummer +1,weil das Array bei 0 startet
-
-      if (aktuelleFragennummer < gesamtanzahlFragen) {              // Überprüfe, ob die aktuelle Fragennummer innerhalb des gültigen Bereichs liegt
-        return aktuelleFragennummer +1;                                                             // Rückgabe der aktuellen Fragenummer
+      const gesamtanzahlFragen = this.Fragen.length;                                          // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
+      const aktuelleFragennummer = this.aktuelleFrageIndex +1 ;                                  // aktuelle Fragennummer +1,weil das Array bei 0 startet
+      if (aktuelleFragennummer <= gesamtanzahlFragen) {                                      // Überprüfe, ob die aktuelle Fragennummer innerhalb des gültigen Bereichs liegt
+        return "Frage:" + aktuelleFragennummer;                                                             // Rückgabe der aktuellen Fragenummer
       } else {
-        return "Übersprungen";      //                                                                     // Rückgabe einer ungültigen Nummer, um anzuzeigen, dass ein Fehler aufgetreten ist
+        return "Übersprungende Fragen";      //                                                                     // Rückgabe einer ungültigen Nummer, um anzuzeigen, dass ein Fehler aufgetreten ist
       }
     } catch(error) {
       console.error('Ungültige aktuelle Fragennummer:',);                 // Zeigt eine Fehlermeldung in der Konsole an, wenn die aktuelle Fragennummer ungültig ist

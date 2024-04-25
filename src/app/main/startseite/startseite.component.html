@@ -1,11 +1,13 @@
 <main>
 <div class="content" >
   <div class="left-side">
-    <div class="test" >
+    <div class="test" *ngIf="!showQuiz" >
     <h1>let's {{ title }}</h1>
     <p> Hier gehts weiter. Klick auf den Button! </p>
     <p>Dann taucht ein Quiz auf. Bist du bereit? </p>
-    <button id="zufalls" type="button" (click)="toggleQuiz($event)">Zufalls Quiz 🎉</button>
+    </div>
+    <div class="card-body">
+    <button id="zufalls" class="btn btn-primary" type="button" (click)="toggleQuiz($event)">Zufalls Quiz 🎉</button>
   </div>
   <app-quiz-Snipped *ngIf="showQuiz" class="Quizapp"></app-quiz-Snipped>
 </div>

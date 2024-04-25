@@ -1,10 +1,10 @@
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { QuizSnippedComponent } from "../quiz-snipped/quiz-snipped.component";
-import { AppComponent } from "../app.component";
-import { QuizComponent } from '../quiz/quiz.component';
-import { JavaScriptStartseiteComponent } from '../java-script-startseite/java-script-startseite.component';
+import { QuizSnippedComponent } from "../../quiz-snipped/quiz-snipped.component";
+import { AppComponent } from "../../app.component";
+import { QuizComponent } from '../../quiz/quiz.component';
+import { JavaScriptStartseiteComponent } from '../quizwahl/java-script-startseite/java-script-startseite.component';
 
 @Component({
     selector: 'app-startseite',

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet,Router } from '@angular/router';
-import { QuizComponent } from '../quiz/quiz.component';
-import { AppComponent } from '../app.component';
+import { QuizComponent } from '../../../quiz/quiz.component';
+import { RouterLink } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-java-script-startseite',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, RouterLinkActive, QuizComponent,AppComponent ],
+  imports: [CommonModule, QuizComponent,RouterLink ],
   templateUrl: './java-script-startseite.component.html',
   styleUrl: './java-script-startseite.component.css'
 })
