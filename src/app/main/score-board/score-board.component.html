@@ -1,1 +1,24 @@
-<p>score-board works!</p>
+<!-- scoreboard.component.html -->
+<div class="scoreboard">
+    <h2>Scoreboard</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of players">
+          <td>{{ player.name }}</td>
+          <td>{{ player.score }}</td>
+          <td>
+            <button (click)="incrementScore(player)">+</button>
+            <button (click)="decrementScore(player)">-</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

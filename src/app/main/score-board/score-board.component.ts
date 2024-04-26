@@ -10,4 +10,19 @@ import { Component } from '@angular/core';
 })
 export class ScoreBoardComponent {
 
+  players = [
+    { name: 'TestPerson', score: 0 },
+    { name: 'Platzhalter', score: 0 },
+    { name: 'Egalomart', score: 0 }
+  ];
+
+  incrementScore(player: any) {
+    player.score++;
+  }
+
+  decrementScore(player: any) {
+    if (player.score > 0) {
+      player.score--;
+    }
+  }
 }
