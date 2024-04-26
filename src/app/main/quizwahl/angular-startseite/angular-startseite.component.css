@@ -1,10 +1,67 @@
-#end{
-    text-align: end;
-  }
-  p {
-    text-align: Center;
-  }
-  
+#Head{
+  text-align: center;
+}
+/* Styling */
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-side, .right-side {
+  flex-basis: 48%; /* Setze die Breite auf 48% */
+}
+
+/* Dein weiteres CSS-Styling */
+
+/* Styling */
+.left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.test {
+  text-align: center;
+}
+
+.quiz-card {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 20px;
+}
+
+#end {
+  text-align: end;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
   /* Definition benutzerdefinierter Farbvariablen für das aktuelle Element oder die aktuelle Komponente */
     :host {
       --bright-blue: oklch(51.01% 0.274 263.83); /* Helles Blau */
