@@ -1,0 +1,58 @@
+[
+    {
+      "title": "Angular Leicht",
+      "description": "Ein einfaches Quiz über Angular.",
+      "filename": "AngularLeicht.ts"
+    },
+    {
+      "title": "Angular Mittel",
+      "description": "Ein mittelschweres Quiz über Angular.",
+      "filename": "AngularMittel.ts"
+    },
+    {
+      "title": "Angular Schwer",
+      "description": "Ein schwieriges Quiz über Angular.",
+      "filename": "AngularSchwer.ts"
+    },
+    {
+      "title": "JavaScript Leicht",
+      "description": "Ein einfaches Quiz über JavaScript.",
+      "filename": "JavaScriptLeicht.ts"
+    },
+    {
+      "title": "JavaScript Mittel",
+      "description": "Ein mittelschweres Quiz über JavaScript.",
+      "filename": "JavaScriptMittel.ts"
+    },
+    {
+      "title": "JavaScript Schwer",
+      "description": "Ein schwieriges Quiz über JavaScript.",
+      "filename": "JavaScriptSchwer.ts"
+    },
+    {
+      "title": "Quiz Snipped",
+      "description": "Ein Quiz über ein bestimmtes Thema.",
+      "filename": "QuizSnipped.ts"
+    },
+    {
+      "title": "Test Fragen",
+      "description": "Ein Quiz mit Testfragen.",
+      "filename": "TestFragen.ts"
+    },
+    {
+      "title": "TypeScript Leicht",
+      "description": "Ein einfaches Quiz über TypeScript.",
+      "filename": "TypeScriptLeicht.ts"
+    },
+    {
+      "title": "TypeScript Mittel",
+      "description": "Ein mittelschweres Quiz über TypeScript.",
+      "filename": "TypeScriptMittel.ts"
+    },
+    {
+      "title": "TypeScript Schwer",
+      "description": "Ein schwieriges Quiz über TypeScript.",
+      "filename": "TypeScriptSchwer.ts"
+    }
+  ]
+  

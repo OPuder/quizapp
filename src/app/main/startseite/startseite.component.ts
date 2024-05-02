@@ -1,17 +1,16 @@
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { QuizSnippedComponent } from "../../quiz-snipped/quiz-snipped.component";
-import { AppComponent } from "../../app.component";
-import { QuizComponent } from '../../quiz/quiz.component';
-import { JavaScriptStartseiteComponent } from '../quizwahl/java-script-startseite/java-script-startseite.component';
+import { HttpClientModule } from '@angular/common/http';
+import { QuizSnippedComponent } from '../../quiz-snipped/quiz-snipped.component';
+
 
 @Component({
     selector: 'app-startseite',
     standalone: true,
     templateUrl: './startseite.component.html',
     styleUrl: './startseite.component.css',
-    imports: [QuizSnippedComponent, AppComponent, QuizComponent, CommonModule, JavaScriptStartseiteComponent, RouterLink, RouterLinkActive,]
+    imports: [CommonModule, RouterLink,HttpClientModule,QuizSnippedComponent]
 })
 export class StartseiteComponent {
   title = 'get started';

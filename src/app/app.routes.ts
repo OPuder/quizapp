@@ -51,6 +51,10 @@ export const routes: Routes = [
         path: 'app-login',
         loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
     },
+    {
+        path: 'app-quizauswahl',
+        loadComponent: () => import('./main/quizwahl/quizauswahl/quizauswahl.component').then(m => m.QuizauswahlComponent),
+    },
 ];
 
     export class AppRoutingModule {}

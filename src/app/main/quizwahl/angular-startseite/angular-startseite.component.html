@@ -1,45 +1,52 @@
-
-<main class="main">
-    <div class="content">
-        <div class="left-side">
-          <div class="test"  *ngIf="!showQuiz">
-          <h1>Bereit ?! Angular wartet auf dich</h1>
-          <p> Hier gehts weiter, schau dich um und klick auf ein Quiz</p>
-          <p>Die Quiz sind verschieden schwer. Bist du bereit? </p>
+<h1 id="Head">Angular zur Letzt</h1>
+<p id="Head"> Hier gehts weiter, schau dich um und klick auf ein Quiz</p>
+<p id="Head">Die Quiz sind verschieden schwer. Bist du bereit? </p>
+<main class="main"> 
+<div class="content">
+  <div class="container">
+  <div class="left-side">
+    <!-- Hier dein linker Inhalt -->
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">Leichtes Quiz</h5>
+        <p class="card-text">Teste dein Wissen mit einfachen Fragen.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
         </div>
-        <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text"></p>
-          <div id="end">
-         <p> Hier geht es zu einen leichten Quiz Vielleicht versuchst du es mal :) <!-- <a href="#" class="btn btn-primary">Leichtes Quiz</a> --> </p>
-            <a routerLink="/app-quiz" class="btn btn-primary">Leichtes Quiz</a>
-          </div>  
       </div>
-          <div class="card-body">
-              <h5 class="card-title"></h5>
-              <p class="card-text"></p>
-              <div id="start">
-              <p> Hier geht es zu einem mittleren Quiz. Es wird schon schwerer!</p>
-              <a  routerLink="/app-quiz" class="btn btn-primary">Mittleres Quiz</a>
-              </div>
-            </div>      
-            <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text"></p>
-              <div id="end">
-             <p> Hier geht es zu einen schweren Quiz.Nimmst du die Herausforderung an? <!-- <a href="#" class="btn btn-primary">Leichtes Quiz</a> --> </p>
-                <a routerLink="/app-quiz" class="btn btn-primary">Schweres Quiz</a>
-              </div>  
-          </div>
-              <div class="card-body">
-                  <h5 class="card-title"></h5>
-                  <p class="card-text"></p>
-                  <div id="start">
-                  <p> Alles gemischt von leicht bis schwer. Stell dein können auf die Probe!</p>
-                  <a routerLink="/app-quiz" class="btn btn-primary">Zufalls Quiz</a>
-                  </div>
-                </div>
-      </div>  
+    </div>
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">Mittleres Quiz</h5>
+        <p class="card-text">Die Herausforderung steigt! Versuche es mit mittelschweren Fragen.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <!-- Hier dein rechter Inhalt -->
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">Schweres Quiz</h5>
+        <p class="card-text">Nimm die Herausforderung an und teste dein Wissen mit schwierigen Fragen.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">Zufalls Quiz</h5>
+        <p class="card-text">Stelle dein Können auf die Probe mit einer Mischung aus einfachen und schwierigen Fragen.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
        <div class="divider" role="separator" aria-label="Divider"></div>  <div class="letf-middel-side">
         <svg
         xmlns="http://www.w3.org/2000/svg"

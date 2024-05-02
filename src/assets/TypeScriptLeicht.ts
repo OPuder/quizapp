@@ -1,4 +1,4 @@
-[
+export const tEasy =[
     {
       "frage": "Wie deklariere ich eine Variable in JavaScript (JS)?",
       "antwort": ["let", "Get", "set", "LETT"],

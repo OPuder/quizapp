@@ -1,4 +1,4 @@
-[
+export const aHard =[
     {
       "frage": "Wie deklariere ich eine Variable in JavaScript (JS)?",
       "antwort": ["let", "Get", "set", "LETT"],
