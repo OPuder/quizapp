@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Fragen } from './fragen';
 import { FragenArrayService } from './fragen-array.service';
+import { aHard } from '../assets/AngularSchwer'
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,13 @@ export class QuizlogicService {
   skipAntwort: string[] = [];
   aktuelleFrage: string = "";
   skipFrage: string = "";
-  JSRLFragen: Fragen[];       // JSRL = JavaScript Random Fragen Leicht
-  Snipped: Fragen[];          // Snipped = Snipped Fragen
+  fragenArrayService: any;
 
-    constructor(private fragenArrayService: FragenArrayService) {
-    this.Fragen = this.fragenArrayService.getSnippedFrage(); //  TODO: test array
-    this.JSRLFragen= this.fragenArrayService.getRandomFrage();
-    this.Snipped = this.fragenArrayService.getSnippedFrage();
+  constructor(private FragenArrayService: FragenArrayService) {
+     this.Fragen = FragenArrayService.getRandomFrage();
+
   }
+
   initializeQuiz() {
     this.aktuelleFrageIndex = 0;
     this.skipFragenIndex = 0;
@@ -35,76 +35,76 @@ export class QuizlogicService {
     this.skipRunde = false;
     this.unbeantworteteFragen = [];
     this.ladeFrage();
-    console.log(this.initializeQuiz); 
+    console.log(this.initializeQuiz);
   }
 
   ladeFrage() {                                                                                // Methode zum Laden der Fragen
     try {
-      //this.Fragen = this.fragenArrayService.getFrage();                                        // Abrufen der Fragen vom Service über die getFragen() 
+      //this.Fragen = this.fragenArrayService.getFrage();                                  // Abrufen der Fragen vom Service über die getFragen() 
       if (this.Fragen.length > this.aktuelleFrageIndex) {                                      // Überprüft ob alle Fragen durchgelaufen sind
         this.aktuelleFrage = this.Fragen[this.aktuelleFrageIndex].frage;                       // Setzen der aktuellen Frage
         this.aktuelleAntwort = this.Fragen[this.aktuelleFrageIndex].antwort;                   // Setzen der Antwortmöglichkeiten
       }
-      if (this.aktuelleFrageIndex === this.Fragen.length){                                     // Überprüft, ob alle Fragen einmal angezeigt wurden
-        if (this.unbeantworteteFragen.length === this.skipFragenIndex){                        // Überprüft ob es skipped Fragen gibt
+      if (this.aktuelleFrageIndex === this.Fragen.length) {                                     // Überprüft, ob alle Fragen einmal angezeigt wurden
+        if (this.unbeantworteteFragen.length === this.skipFragenIndex) {                        // Überprüft ob es skipped Fragen gibt
           this.quizAbgeschlossen = true;                                                       // Setzt Den Quiz abschluss auf true um das Ergebniss anzuzeigen
-        }else{
+        } else {
           this.skipFragen();                                                                   // Ruft die Funktion für die übersprungenden Fragen auf 
-          }
+        }
       }
-    }catch (error) {
-          console.error('Fehler beim Laden der Fragen:', error);                               // Fehlerbehandlung, falls das Laden der Fragen fehlschlägt
-          }
+    } catch (error) {
+      console.error('Fehler beim Laden der Fragen:', error);                               // Fehlerbehandlung, falls das Laden der Fragen fehlschlägt
+    }
   }
   fragenNummer(): number | string {                                                                     // Methode zum Abrufen der aktuellen Fragennummer
-     try {
+    try {
       const gesamtanzahlFragen = this.Fragen.length;                                          // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
-      const aktuelleFragennummer = this.aktuelleFrageIndex +1 ;                                  // aktuelle Fragennummer +1,weil das Array bei 0 startet
+      const aktuelleFragennummer = this.aktuelleFrageIndex + 1;                                  // aktuelle Fragennummer +1,weil das Array bei 0 startet
       if (aktuelleFragennummer <= gesamtanzahlFragen) {                                      // Überprüfe, ob die aktuelle Fragennummer innerhalb des gültigen Bereichs liegt
         return "Frage:" + aktuelleFragennummer;                                                             // Rückgabe der aktuellen Fragenummer
       } else {
         return "Übersprungende Fragen";      //                                                                     // Rückgabe einer ungültigen Nummer, um anzuzeigen, dass ein Fehler aufgetreten ist
       }
-    } catch(error) {
+    } catch (error) {
       console.error('Ungültige aktuelle Fragennummer:',);                 // Zeigt eine Fehlermeldung in der Konsole an, wenn die aktuelle Fragennummer ungültig ist
-      return -1;  
+      return -1;
     }
   }
   pruefeAntwort(antwortIndex: number) {                                                        // Methode zum Prüfen der Antwort
-    try{
+    try {
       this.antwortIndex = antwortIndex;                                                        // Setzen des ausgewählten Antwortindex
-      if (this.Fragen.length > this.aktuelleFrageIndex){                                       // Überprüft ob alle Fragen durchgelaufen sind
+      if (this.Fragen.length > this.aktuelleFrageIndex) {                                       // Überprüft ob alle Fragen durchgelaufen sind
         if (this.Fragen[this.aktuelleFrageIndex].correctAntwort === antwortIndex) {            // Überprüft die Antwort mit der Hinterlegten im Array
           this.punktzahl++;                                                                    // Erhöhen der Punktzahl bei richtiger Antwort
-      }
-      this.aktuelleFrageIndex ++;                                                              // Inkrementieren des FrageIndex für die nächste Frage
-      this.ladeFrage();                                                                        // ruft die Funktion ladeFrage auf um die naechste Frage anzuzeigen
         }
+        this.aktuelleFrageIndex++;                                                              // Inkrementieren des FrageIndex für die nächste Frage
+        this.ladeFrage();                                                                        // ruft die Funktion ladeFrage auf um die naechste Frage anzuzeigen
+      }
       else {                                                                                   // Überprüfen der Antwort für übersprungene Fragen
         if (this.unbeantworteteFragen[this.skipFragenIndex].correctAntwort === antwortIndex) { // Überprüft die Antwort mit der Hinterlegten im Array 
           this.punktzahl++;                                                                    // Erhöhen der Punktzahl bei richtiger Antwort
         }
         this.skipFragenIndex++;                                                                // Inkrementieren des skipFrageIndex für die nächste Frage
         this.skipFragen();                                                                     // Aufrufen der Funktion skippedFragen, um die nächste übersprungene Frage anzuzeigen
-        }
-      }catch(error) {
-        console.error('Fehler bei der Auswahl der Antworten', error);                          // Fängt Fehler ab und gibt sie in der Konsole aus
-        }
+      }
+    } catch (error) {
+      console.error('Fehler bei der Auswahl der Antworten', error);                          // Fängt Fehler ab und gibt sie in der Konsole aus
     }
+  }
   nextFrage() {                                                                            // Methode zum Überspringen der aktuellen Frage
     try {
       if (!this.Fragen[this.aktuelleFrageIndex].skip) {                                        // Überprüfen, ob die aktuelle Frage bereits übersprungen wurde
         this.Fragen[this.aktuelleFrageIndex].skip = true;                                      // Falls nicht, markiere die Frage als übersprungen (skipped auf true setzen)
         this.unbeantworteteFragen.push(this.Fragen[this.aktuelleFrageIndex]);                  // Füge die Frage zur Liste der nicht beantworteten Fragen hinzu
-        console.log("Skip Fragen Array" ,this.unbeantworteteFragen);                           // Zeige die Liste der nicht beantworteten Fragen in der Konsole an
+        console.log("Skip Fragen Array", this.unbeantworteteFragen);                           // Zeige die Liste der nicht beantworteten Fragen in der Konsole an
       }
       if (this.aktuelleFrageIndex < this.Fragen.length) {                                      // Überprüfen, ob es noch weitere Fragen gibt, und ggf. zur nächsten Frage wechseln 
         this.aktuelleFrageIndex++;                                                             // Falls ja, erhöhe den Index auf die nächste Frage
         this.ladeFrage();                                                                      // Zeige die nächste Frage an
       }
-    }catch (error) {
+    } catch (error) {
       console.error('Fehler beim Anzeigen der nächsten Frage:', error);                        // Fängt Fehler ab und gibt sie in der Konsole aus
-      console.log ("Frage wurde schon einmal übersprungen");                                   // Fehlermeldung im Consolen Log
+      console.log("Frage wurde schon einmal übersprungen");                                   // Fehlermeldung im Consolen Log
     }
   }
   skipFragen() {                                                                               // Methode zum Anzeigen der übersprungenen Fragen
@@ -141,4 +141,5 @@ export class QuizlogicService {
       service.fragenArray[i].skip = skip;                                                      // Setze skip auf skip
     }
   }
+
 }
