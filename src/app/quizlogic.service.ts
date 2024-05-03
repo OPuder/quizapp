@@ -19,6 +19,7 @@ import { aZufall } from '../assets/AngularZufall';                              
   providedIn: 'root'                                                                           // Das QuizlogicService wird als Singleton-Service im Root-Injector registriert
 })
 export class QuizlogicService {                                                                // QuizlogicService-Klasse
+  zufälligeFragen15: Fragen[] = [];                                                            // Array für die zufügen15 Fragen
   zufallsFragen: Fragen[] = [];                                                                // Array für die zufälligen Fragen
   Fragen: Fragen[] = [];                                                                       // Array für die Fragen
   unbeantworteteFragen: Fragen[] = [];                                                         // Array für die unbeantworteten Fragen
@@ -102,7 +103,10 @@ export class QuizlogicService {                                                 
   
     const zufallsFragen = [...selectedArray];                                                  // Kopiere das ausgewählte Array in ein neues Array
     zufallsFragen.sort(() => Math.random() - 0.5);                                             // Mische die Fragen im Array zufällig
-    return console.log(zufallsFragen), this.Fragen = zufallsFragen;                            // Konsolenausgabe des gemischten Arrays und Zuweisung des gemischten Arrays zu den Fragen
+    const zufälligeFragen15 = zufallsFragen.slice(0, 15);                                       // Wähle die ersten 15 Fragen aus dem gemischten Array aus
+    console.log(zufälligeFragen15);                                                            // Konsolenausgabe des Arrays mit 15 zufälligen Fragen
+    this.Fragen = zufälligeFragen15;                                                            // Zuweisung des gemischten Arrays zu den Fragen
+    return console.log(zufallsFragen),this.Fragen = zufälligeFragen15;                            // Konsolenausgabe des gemischten Arrays und Zuweisung des gemischten Arrays zu den Fragen
   }  
   initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
     this.aktuelleFrageIndex = 0;                                                               // Setze den Index der aktuellen Frage auf 0
