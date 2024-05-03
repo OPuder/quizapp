@@ -103,10 +103,9 @@ export class QuizlogicService {                                                 
   
     const zufallsFragen = [...selectedArray];                                                  // Kopiere das ausgewählte Array in ein neues Array
     zufallsFragen.sort(() => Math.random() - 0.5);                                             // Mische die Fragen im Array zufällig
-    const zufälligeFragen15 = zufallsFragen.slice(0, 15);                                       // Wähle die ersten 15 Fragen aus dem gemischten Array aus
+    const zufälligeFragen15 = zufallsFragen.slice(0, 15);                                      // Wähle die ersten 15 Fragen aus dem gemischten Array aus
     console.log(zufälligeFragen15);                                                            // Konsolenausgabe des Arrays mit 15 zufälligen Fragen
-    this.Fragen = zufälligeFragen15;                                                            // Zuweisung des gemischten Arrays zu den Fragen
-    return console.log(zufallsFragen),this.Fragen = zufälligeFragen15;                            // Konsolenausgabe des gemischten Arrays und Zuweisung des gemischten Arrays zu den Fragen
+    return console.log(zufallsFragen),this.Fragen = zufälligeFragen15;                         // Konsolenausgabe des gemischten Arrays und Zuweisung des gemischten Arrays zu den Fragen
   }  
   initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
     this.aktuelleFrageIndex = 0;                                                               // Setze den Index der aktuellen Frage auf 0
@@ -119,7 +118,7 @@ export class QuizlogicService {                                                 
     console.log(this.initializeQuiz);                                                          // Konsolenausgabe zur Verifizierung, dass die Methode aufgerufen wurde
     console.log(this.Fragen);                                                                  // Konsolenausgabe des aktuellen Zustands der Fragenliste
   }
-  ladeFrage() {                                                                              // Methode zum Laden der Fragen
+  ladeFrage() {                                                                                // Methode zum Laden der Fragen
     try {
     if (this.Fragen.length > this.aktuelleFrageIndex) {                                        // Überprüft ob alle Fragen durchgelaufen sind
         this.aktuelleFrage = this.Fragen[this.aktuelleFrageIndex].frage;                       // Setzen der aktuellen Frage
@@ -216,6 +215,6 @@ export class QuizlogicService {                                                 
     this.punktzahl = 0;                                                                        // Zurücksetzen der Punktzahl
     this.ladeFrage();                                                                          // Laden der Fragen für einen Neustart
     this.Fragen = this.Fragen.sort(() => Math.random() - 0.5);                                 // Neuladen der Fragen in zufallige Reihenfolge
-    console.log("Neustart des Quiz", this.unbeantworteteFragen, this.Fragen)                   // Ausgabe der Fragen und der nicht beantworteten Fragen in der Konsole
+    console.log("Neustart des Quiz", this.unbeantworteteFragen, "die fragen aus dem quiz",this.Fragen,this.zufälligeFragen15,this.zufallsFragen)                   // Ausgabe der Fragen und der nicht beantworteten Fragen in der Konsole
   }
 }
