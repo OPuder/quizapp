@@ -4,27 +4,27 @@
 <div class="container">
   <div class="relative-element">
   <!-- Quiz-Container -->
-  <div *ngIf="!quizAbgeschlossen" id="quiz-container" class="card">
+  <div *ngIf="!quizAbgeschlossen()" id="quiz-container" class="card">
     <div class="card-header">
       <!-- Anzeige der Frage-Nummer -->
-      <div id="Fragennummer"><h2>Frage: {{ fragenNummer() }}</h2></div>
+      <div id="Fragennummer"><h2>{{ fragenNummer() }}</h2></div>
       <!-- Anzeige der aktuellen Frage -->
-      <div id="Frage"><p>{{ aktuelleFrage }}</p></div>
+      <div id="Frage"><p>{{ aktuelleFrage() }}</p></div>
     </div>
     <!-- Auswahlmöglichkeiten für die Frage -->
     <div class="card-body" >
-      <div id="antwort" *ngFor="let antwort of (aktuelleAntwort); let i = index">
+      <div id="antwort" *ngFor="let antwort of (aktuelleAntwort()); let i = index">
         <!-- Button für jede Antwortmöglichkeit -->
         <button class="btn btn-outline-secondary me-auto col-6 border border-white" (click)="pruefeAntwort(i)">{{ antwort }}</button>
       </div>
     </div>
     <!-- Button für das Überspringen zur nächsten Frage -->
     <div class="card-footer">
-      <button id="skipFrage" class="btn btn-warning" (click)="nextFrage()"[disabled]="skipRunde">Nächste Frage</button>
+      <button id="skipFrage" class="btn btn-warning" (click)="nextFrage()" [disabled]="skipRunde">Nächste Frage</button>
     </div>
   </div>
 </div>  <!-- Ergebnis-Anzeige -->
-<div id="result" *ngIf="quizAbgeschlossen" class="card">
+<div id="result" *ngIf="quizAbgeschlossen()" class="card">
   <div class="card-header">
 
     <!-- Überschrift für das Ergebnis -->
@@ -34,7 +34,7 @@
 
   <!-- Anzeige der Punktzahl -->
   <div class="card-body">
-    <p>Du hast {{ punktzahl }} von {{ Fragen.length }} Fragen richtig beantwortet.</p>
+    <p>Du hast {{ punktzahl() }} von 4 oder 30  Fragen richtig beantwortet.</p>
   </div>
 
   <!-- Button zum Neustarten des Quiz -->

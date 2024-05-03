@@ -21,7 +21,7 @@
     </div>
     <!-- Button für das Überspringen zur nächsten Frage -->
     <div class="card-footer">
-      <button id="skipFrage" class="btn btn-warning" (click)="nextFrage()">Nächste Frage</button>
+      <button id="skipFrage" class="btn btn-warning" (click)="nextFrage()" [disabled]="skipRunde">Nächste Frage</button>
     </div>
   </div>
 </div>  <!-- Ergebnis-Anzeige -->

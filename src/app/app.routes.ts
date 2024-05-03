@@ -1,33 +1,30 @@
-import { JavaScriptStartseiteComponent } from './main/quizwahl/java-script-startseite/java-script-startseite.component';
-import {Routes, RouterModule} from '@angular/router';
-import { QuizComponent } from './quiz/quiz.component';
-import { AppComponent } from './app.component';
+import { Routes } from '@angular/router';                                                 // Import der Angular-Routing-Klasse
 
-
+// Definition der Routing-Konfiguration für die Angular-Anwendung
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'app-startseite',
+        redirectTo: 'app-startseite',                                                    // Weiterleitung zur Startseite, wenn keine spezifische Route angegeben ist
         pathMatch: 'full'
     },
     {
-        path: 'app-root',
+        path: 'app-root',                                                                // Routenkonfiguration für die Root-Komponente der Anwendung
         loadComponent: () => import('./app.component').then(m => m.AppComponent),
     },
     {
-        path: 'app-startseite',
+        path: 'app-startseite',                                                          // Routenkonfiguration für die Startseite-Komponente      
         loadComponent: () => import('./main/startseite/startseite.component').then(m => m.StartseiteComponent),
     },
     {
-        path: 'app-quiz',
+        path: 'app-quiz',                                                                // Routenkonfiguration für die Quiz-Komponente
         loadComponent: () => import('./quiz/quiz.component').then(m => m.QuizComponent)
     },
+  //                                                                      // Weitere Routenkonfigurationen für verschiedene Seiten der Anwendung...
     {
         path: 'app-wissenwertes',
         loadComponent: () => import('./main/wissenwertes/wissenwertes.component').then(m => m.WissenwertesComponent),
     },
     {
-
         path: 'app-java-script-startseite',
         loadComponent: () => import('./main/quizwahl/java-script-startseite/java-script-startseite.component').then(m => m.JavaScriptStartseiteComponent)
     },
@@ -56,5 +53,4 @@ export const routes: Routes = [
         loadComponent: () => import('./main/quizwahl/quizauswahl/quizauswahl.component').then(m => m.QuizauswahlComponent),
     },
 ];
-
-    export class AppRoutingModule {}
+export class AppRoutingModule {}                                                          // Definition der AppRoutingModule-Klasse

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { QuizComponent } from '../../../quiz/quiz.component';
 import { RouterLink } from '@angular/router';
+import { QuizlogicService } from '../../../quizlogic.service';
 
 
 
@@ -14,14 +15,10 @@ import { RouterLink } from '@angular/router';
 })
 export class JavaScriptStartseiteComponent {
 
-  showQuiz: boolean = false;
-  showStartseite: boolean = false;
-
-
-  toggleQuiz(event: Event) {
-    event.preventDefault();
-    this.showQuiz = !this.showQuiz;
-  }
+  constructor(private QuizlogicService: QuizlogicService) {}
+  toggleQuiz(selectedCase: number) {
+    this.QuizlogicService.toggleQuiz(selectedCase);
+   }
 
 
 }

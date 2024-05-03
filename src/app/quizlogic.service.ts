@@ -1,84 +1,161 @@
-import { Injectable } from '@angular/core';
-import { Fragen } from './fragen';
-import { FragenArrayService } from './fragen-array.service';
-import { aHard } from '../assets/AngularSchwer'
+import { Injectable } from '@angular/core';                                                    // Import von Injectable aus dem Angular-Core für die Service-Deklaration
+import { Fragen } from './fragen';                                                             // Import der Fragen-Schnittstelle
+import { qSnipped } from '../assets/QuizSnipped';                                              // Import des Quiz-Snippets mit Fragen
+import { testFragen } from '../assets/TestFragen';                                             // Import von Testfragen
+import { jMidd } from '../assets/JavaScriptMittel';                                            // Import von JavaScript-Mittelstufe-Fragen
+import { jEasy } from '../assets/JavaScriptLeicht';                                            // Import von JavaScript-Leicht-Fragen
+import { jHard } from '../assets/JavaScriptSchwer';                                            // Import von JavaScript-Schwer-Fragen
+import { jZufall } from '../assets/JavaScriptZufall';                                          // Import von zufälligen JavaScript-Fragen
+import { tEasy } from '../assets/TypeScriptLeicht';                                            // Import von TypeScript-Leicht-Fragen
+import { tMidd } from '../assets/TypeScriptMittel';                                            // Import von TypeScript-Mittelstufe-Fragen
+import { tHard } from '../assets/TypeScriptSchwer';                                            // Import von TypeScript-Schwer-Fragen
+import { tZufall } from '../assets/TypeScriptZufall';                                          // Import von zufälligen TypeScript-Fragen
+import { aEasy } from '../assets/AngularLeicht';                                               // Import von Angular-Leicht-Fragen
+import { aMidd } from '../assets/AngularMittel';                                               // Import von Angular-Mittelstufe-Fragen
+import { aHard } from '../assets/AngularSchwer';                                               // Import von Angular-Schwer-Fragen
+import { aZufall } from '../assets/AngularZufall';                                             // Import von zufälligen Angular-Fragen
 
-@Injectable({
-  providedIn: 'root'
+@Injectable({                                                                                  // Injectable-Klasse
+  providedIn: 'root'                                                                           // Das QuizlogicService wird als Singleton-Service im Root-Injector registriert
 })
-export class QuizlogicService {
+export class QuizlogicService {                                                                // QuizlogicService-Klasse
+  zufallsFragen: Fragen[] = [];                                                                // Array für die zufälligen Fragen
+  Fragen: Fragen[] = [];                                                                       // Array für die Fragen
+  unbeantworteteFragen: Fragen[] = [];                                                         // Array für die unbeantworteten Fragen
+  quizAbgeschlossen: boolean = false;                                                          // Flag, um den Abschluss des Quiz zu verfolgen
+  skipRunde: boolean = false;                                                                  // Flag, um zu verfolgen, ob sich das Quiz in einer "Skip-Runde" befindet
+  selectedCase: number = 0;                                                                    // Variable zur Speicherung des ausgewählten Falls für das Quiz
+  punktzahl: number = 0;                                                                       // Variable zur Speicherung der Punktzahl
+  aktuelleFrageIndex: number = 0;                                                              // Index der aktuellen Frage im Fragen-Array
+  skipFragenIndex: number = 0;                                                                 // Index der übersprungenen Frage im unbeantworteten Fragen-Array
+  antwortIndex: number = 0;                                                                    // Index der ausgewählten Antwort
+  aktuelleAntwort: string[] = [];                                                              // Array für die aktuelle Antwortmöglichkeiten
+  skipAntwort: string[] = [];                                                                  // Array für die übersprungene Antwortmöglichkeiten
+  aktuelleFrage: string = "";                                                                  // Variable für die aktuelle Frage
+  skipFrage: string = "";                                                                      // Variable für die übersprungene Frage
 
-  Fragen: Fragen[] = [];
-  unbeantworteteFragen: Fragen[] = [];
-  quizAbgeschlossen: boolean = false;
-  skipRunde: boolean = false;
-  punktzahl: number = 0;
-  aktuelleFrageIndex: number = 0;
-  skipFragenIndex: number = 0;
-  antwortIndex: number = 0;
-  aktuelleAntwort: string[] = [];
-  skipAntwort: string[] = [];
-  aktuelleFrage: string = "";
-  skipFrage: string = "";
-  fragenArrayService: any;
+  constructor() {}                                                                             // constructor der Klasse QuizlogicService
 
-  constructor(private FragenArrayService: FragenArrayService) {
-     this.Fragen = FragenArrayService.getRandomFrage();
-
+  toggleQuiz(selectedCase: number) {                                                           // Methode zum Starten des Quizzes
+    let selectedArray: Fragen[];                                                               // Deklaration einer lokalen Variablen für das ausgewählte Array von Fragen
+  
+    switch(selectedCase) {                                                                     // Verwendung eines switch-Statements, um das entsprechende Array von Fragen basierend auf dem ausgewählten Fall auszuwählen
+      case 15:
+        selectedArray = qSnipped;                                                              // Setze das ausgewählte Array auf das Quiz Snipped-Array
+        console.log(qSnipped);                                                                 // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 0:
+        selectedArray = testFragen;                                                            // Setze das ausgewählte Array auf das Test-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 1:
+        selectedArray = jEasy;                                                                 // Setze das ausgewählte Array auf das Leichte JavaScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 2:
+        selectedArray = jMidd;                                                                 // Setze das ausgewählte Array auf das Mittlere JavaScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 3:
+        selectedArray = jHard;                                                                 // Setze das ausgewählte Array auf das Schwere JavaScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 4:
+        selectedArray = jZufall;                                                               // Setze das ausgewählte Array auf ein Zufällig gemischtes JavaScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 5:
+        selectedArray = tEasy;                                                                 // Setze das ausgewählte Array auf das Leichte TypeScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 6:
+        selectedArray = tMidd;                                                                 // Setze das ausgewählte Array auf das Mittlere TypeScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 7:
+        selectedArray = tHard;                                                                 // Setze das ausgewählte Array auf das Schwere TypeScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 8:
+        selectedArray = tZufall;                                                               // Setze das ausgewählte Array auf ein Zufällig gemischtes TypeScript-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 9:
+        selectedArray = aEasy;                                                                 // Setze das ausgewählte Array auf das Leichte Angular-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 10:
+        selectedArray = aMidd;                                                                 // Setze das ausgewählte Array auf das Mittlere Angular-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 11:
+        selectedArray = aHard;                                                                 // Setze das ausgewählte Array auf das Schwere Angular-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      case 12:
+        selectedArray = aZufall;                                                               // Setze das ausgewählte Array auf ein Zufällig gemischtes Angular-Array
+        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        break;
+      default:
+        throw new Error('Ungültiger Fall ausgewählt');                                         // Fehlermeldung für den Fall, dass ein ungültiger Fall ausgewählt wurde
+    }
+  
+    const zufallsFragen = [...selectedArray];                                                  // Kopiere das ausgewählte Array in ein neues Array
+    zufallsFragen.sort(() => Math.random() - 0.5);                                             // Mische die Fragen im Array zufällig
+    return console.log(zufallsFragen), this.Fragen = zufallsFragen;                            // Konsolenausgabe des gemischten Arrays und Zuweisung des gemischten Arrays zu den Fragen
+  }  
+  initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
+    this.aktuelleFrageIndex = 0;                                                               // Setze den Index der aktuellen Frage auf 0
+    this.skipFragenIndex = 0;                                                                  // Setze den Index der übersprungenen Fragen auf 0
+    this.punktzahl = 0;                                                                        // Setze die Punktzahl auf 0
+    this.quizAbgeschlossen = false;                                                            // Setze den Quizstatus auf nicht abgeschlossen
+    this.skipRunde = false;                                                                    // Setze den Status der Übersprung-Runde auf false
+    this.unbeantworteteFragen = [];                                                            // Setze die Liste der unbeantworteten Fragen auf ein leeres Array
+    this.ladeFrage();                                                                          // Lade die erste Frage
+    console.log(this.initializeQuiz);                                                          // Konsolenausgabe zur Verifizierung, dass die Methode aufgerufen wurde
+    console.log(this.Fragen);                                                                  // Konsolenausgabe des aktuellen Zustands der Fragenliste
   }
-
-  initializeQuiz() {
-    this.aktuelleFrageIndex = 0;
-    this.skipFragenIndex = 0;
-    this.punktzahl = 0;
-    this.quizAbgeschlossen = false;
-    this.skipRunde = false;
-    this.unbeantworteteFragen = [];
-    this.ladeFrage();
-    console.log(this.initializeQuiz);
-  }
-
-  ladeFrage() {                                                                                // Methode zum Laden der Fragen
+  ladeFrage() {                                                                              // Methode zum Laden der Fragen
     try {
-      //this.Fragen = this.fragenArrayService.getFrage();                                  // Abrufen der Fragen vom Service über die getFragen() 
-      if (this.Fragen.length > this.aktuelleFrageIndex) {                                      // Überprüft ob alle Fragen durchgelaufen sind
+    if (this.Fragen.length > this.aktuelleFrageIndex) {                                        // Überprüft ob alle Fragen durchgelaufen sind
         this.aktuelleFrage = this.Fragen[this.aktuelleFrageIndex].frage;                       // Setzen der aktuellen Frage
         this.aktuelleAntwort = this.Fragen[this.aktuelleFrageIndex].antwort;                   // Setzen der Antwortmöglichkeiten
       }
-      if (this.aktuelleFrageIndex === this.Fragen.length) {                                     // Überprüft, ob alle Fragen einmal angezeigt wurden
-        if (this.unbeantworteteFragen.length === this.skipFragenIndex) {                        // Überprüft ob es skipped Fragen gibt
+      if (this.aktuelleFrageIndex === this.Fragen.length) {                                    // Überprüft, ob alle Fragen einmal angezeigt wurden
+        if (this.unbeantworteteFragen.length === this.skipFragenIndex) {                       // Überprüft ob es skipped Fragen gibt
           this.quizAbgeschlossen = true;                                                       // Setzt Den Quiz abschluss auf true um das Ergebniss anzuzeigen
         } else {
+          this.skipRunde = true;
           this.skipFragen();                                                                   // Ruft die Funktion für die übersprungenden Fragen auf 
         }
       }
-    } catch (error) {
-      console.error('Fehler beim Laden der Fragen:', error);                               // Fehlerbehandlung, falls das Laden der Fragen fehlschlägt
+    }catch (error) {
+      console.error('Fehler beim Laden der Fragen:',this.Fragen, error);                       // Fehlerbehandlung, falls das Laden der Fragen fehlschlägt
     }
   }
-  fragenNummer(): number | string {                                                                     // Methode zum Abrufen der aktuellen Fragennummer
+  fragenNummer(): number | string {                                                            // Methode zum Abrufen der aktuellen Fragennummer
     try {
-      const gesamtanzahlFragen = this.Fragen.length;                                          // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
-      const aktuelleFragennummer = this.aktuelleFrageIndex + 1;                                  // aktuelle Fragennummer +1,weil das Array bei 0 startet
-      if (aktuelleFragennummer <= gesamtanzahlFragen) {                                      // Überprüfe, ob die aktuelle Fragennummer innerhalb des gültigen Bereichs liegt
-        return "Frage:" + aktuelleFragennummer;                                                             // Rückgabe der aktuellen Fragenummer
+      const gesamtanzahlFragen = this.Fragen.length;                                           // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
+      const aktuelleFragennummer = this.aktuelleFrageIndex + 1;                                // aktuelle Fragennummer +1,weil das Array bei 0 startet
+      if (aktuelleFragennummer <= gesamtanzahlFragen) {                                        // Überprüfe, ob die aktuelle Fragennummer innerhalb des gültigen Bereichs liegt
+        return "Frage:" + aktuelleFragennummer;                                                // Rückgabe der aktuellen Fragenummer
       } else {
-        return "Übersprungende Fragen";      //                                                                     // Rückgabe einer ungültigen Nummer, um anzuzeigen, dass ein Fehler aufgetreten ist
+        return "Übersprungende Fragen";                                                        // Rückgabe eines strings mit dem Inhalt "Übersprungenden Frage" anstatt der aktuellen Fragennummer
       }
-    } catch (error) {
-      console.error('Ungültige aktuelle Fragennummer:',);                 // Zeigt eine Fehlermeldung in der Konsole an, wenn die aktuelle Fragennummer ungültig ist
+    }catch (error) {
+      console.error('Ungültige aktuelle Fragennummer:',);                                      // Zeigt eine Fehlermeldung in der Konsole an, wenn die aktuelle Fragennummer ungültig ist
       return -1;
     }
   }
   pruefeAntwort(antwortIndex: number) {                                                        // Methode zum Prüfen der Antwort
     try {
       this.antwortIndex = antwortIndex;                                                        // Setzen des ausgewählten Antwortindex
-      if (this.Fragen.length > this.aktuelleFrageIndex) {                                       // Überprüft ob alle Fragen durchgelaufen sind
+      if (this.Fragen.length > this.aktuelleFrageIndex) {                                      // Überprüft ob alle Fragen durchgelaufen sind
         if (this.Fragen[this.aktuelleFrageIndex].correctAntwort === antwortIndex) {            // Überprüft die Antwort mit der Hinterlegten im Array
           this.punktzahl++;                                                                    // Erhöhen der Punktzahl bei richtiger Antwort
         }
         this.aktuelleFrageIndex++;                                                              // Inkrementieren des FrageIndex für die nächste Frage
-        this.ladeFrage();                                                                        // ruft die Funktion ladeFrage auf um die naechste Frage anzuzeigen
+        this.ladeFrage();                                                                       // ruft die Funktion ladeFrage auf um die naechste Frage anzuzeigen
       }
       else {                                                                                   // Überprüfen der Antwort für übersprungene Fragen
         if (this.unbeantworteteFragen[this.skipFragenIndex].correctAntwort === antwortIndex) { // Überprüft die Antwort mit der Hinterlegten im Array 
@@ -87,11 +164,11 @@ export class QuizlogicService {
         this.skipFragenIndex++;                                                                // Inkrementieren des skipFrageIndex für die nächste Frage
         this.skipFragen();                                                                     // Aufrufen der Funktion skippedFragen, um die nächste übersprungene Frage anzuzeigen
       }
-    } catch (error) {
-      console.error('Fehler bei der Auswahl der Antworten', error);                          // Fängt Fehler ab und gibt sie in der Konsole aus
+    }catch (error) {
+      console.error('Fehler bei der Auswahl der Antworten', error);                            // Fängt Fehler ab und gibt sie in der Konsole aus
     }
   }
-  nextFrage() {                                                                            // Methode zum Überspringen der aktuellen Frage
+  nextFrage() {                                                                                // Methode zum Überspringen der aktuellen Frage
     try {
       if (!this.Fragen[this.aktuelleFrageIndex].skip) {                                        // Überprüfen, ob die aktuelle Frage bereits übersprungen wurde
         this.Fragen[this.aktuelleFrageIndex].skip = true;                                      // Falls nicht, markiere die Frage als übersprungen (skipped auf true setzen)
@@ -104,7 +181,7 @@ export class QuizlogicService {
       }
     } catch (error) {
       console.error('Fehler beim Anzeigen der nächsten Frage:', error);                        // Fängt Fehler ab und gibt sie in der Konsole aus
-      console.log("Frage wurde schon einmal übersprungen");                                   // Fehlermeldung im Consolen Log
+      console.log("Frage wurde schon einmal übersprungen");                                    // Fehlermeldung im Consolen Log
     }
   }
   skipFragen() {                                                                               // Methode zum Anzeigen der übersprungenen Fragen
@@ -119,13 +196,14 @@ export class QuizlogicService {
         this.aktuelleAntwort = this.skipAntwort;                                               // Setze die aktuelleAntwort auf die skipAntwort
         this.skipRunde = true;                                                                 // Setze skipRunde auf true, um den Button "naechste Frage" zu deaktivieren
       }
-    } catch (error) {
+    }catch (error) {
       console.error('Fehler beim Anzeigen der übersprungenen Fragen:', error);                 // Fängt Fehler ab und gibt sie in der Konsole aus
     }
   }
-  // Funktion zum Neustarten des Quiz 
   neustart() {                                                                                 // Methode zum Neustarten des Quiz-
-    this.booleanReset(this.fragenArrayService, false);                                         // Setze alle Fragen auf nicht Übersprungen     
+    this.Fragen.forEach((frage: Fragen) => {                                                   // Schleife durch alle Fragen des Arrays
+      frage.skip = false;                                                                      // Setze alle Fragen auf nicht Übersprungen
+    });                                                                                            
     this.skipRunde = false;                                                                    // Setze skipRunde auf false, um den Button "naechste Frage" zu aktivieren
     this.quizAbgeschlossen = false;                                                            // Setzen des Quizstatus auf nicht abgeschlossen
     this.unbeantworteteFragen = [];                                                            // Setze die Liste der nicht beantworteten Fragen auf eine leere Liste
@@ -133,13 +211,7 @@ export class QuizlogicService {
     this.skipFragenIndex = 0;                                                                  // Zurücksetzen der skipFragenIndex
     this.punktzahl = 0;                                                                        // Zurücksetzen der Punktzahl
     this.ladeFrage();                                                                          // Laden der Fragen für einen Neustart
-    this.Fragen = this.fragenArrayService.getRandomFrage();                                    // Abrufen der Fragen vom FragenArrayService und Zuweisen an die Fragen-Variable der Komponente 
-    //console.log("Neustart des Quiz", this.unbeantworteteFragen, this.Fragen)                   // Ausgabe der Fragen und der nicht beantworteten Fragen in der Konsole
+    this.Fragen = this.Fragen.sort(() => Math.random() - 0.5);                                 // Neuladen der Fragen in zufallige Reihenfolge
+    console.log("Neustart des Quiz", this.unbeantworteteFragen, this.Fragen)                   // Ausgabe der Fragen und der nicht beantworteten Fragen in der Konsole
   }
-  booleanReset(service: FragenArrayService, skip: boolean) {                                   // Setze alle Fragen auf nicht Übersprungen
-    for (let i = 0; i < service.fragenArray.length; i++) {                                     // für alle Fragen in der Liste
-      service.fragenArray[i].skip = skip;                                                      // Setze skip auf skip
-    }
-  }
-
 }

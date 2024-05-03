@@ -7,7 +7,7 @@
     <p>Dann taucht ein Quiz auf. Bist du bereit? </p>
     </div>
     <div class="card-body">
-    <button id="zufalls" class="btn btn-primary" type="button" (click)="toggleQuiz($event)">Zufalls Quiz 🎉</button>
+    <button id="zufalls" class="btn btn-primary" type="button" (click)="toggleQuiz($event, 15)">Zufalls Quiz 🎉</button>
   </div>
   <app-quiz-Snipped *ngIf="showQuiz" class="Quizapp"></app-quiz-Snipped>
 </div>

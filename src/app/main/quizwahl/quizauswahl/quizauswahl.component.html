@@ -1,5 +1,44 @@
-<p>quizauswahl works!</p>
-
-<p>{{test}}</p>
-<p>{{test2 | json}}</p>
-<p>{{test3}}</p>
+<!-- Alles was in der Startseite steht ist erstmal Platzhalter-->
+<h1 id="Head"> Willkommen zur Programmiersprachen-Wahlseite!</h1>
+<p id="Head"> Ob du dich für die Vielseitigkeit von JavaScript, die Typsicherheit von TypeScript oder die Strukturierungs- </p>
+<p id="Head"> möglichkeiten von Angular interessierst, hier findest du den richtigen Einstieg.</p>
+<p id="Head"> Die Quiz sind verschieden schwer. Bist du bereit? </p>
+<main class="main"> 
+<div class="content">
+  <div class="container">
+  <div class="left-side">
+    <!-- Hier dein linker Inhalt -->
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">JavaScript </h5>
+        <p class="card-text">Teste dein Wissen mit einfachen Fragen.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-java-script-startseite" class="btn btn-primary" >Start</a>
+        </div>        
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">TypeScript</h5>
+        <p class="card-text">Die Herausforderung steigt!Auf zur Typsicherheit.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-type-script-startseite" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <!-- Hier dein rechter Inhalt -->
+    <div class="quiz-card">
+      <div class="card-body">
+        <h5 class="card-title">Angular</h5>
+        <p class="card-text">Nimm die Herausforderung an und teste dein Wissen mit dem bereits erlernten.</p>
+        <div id="end" class="text-right">
+          <a routerLink="/app-angular-startseite" class="btn btn-primary">Start</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+</main>

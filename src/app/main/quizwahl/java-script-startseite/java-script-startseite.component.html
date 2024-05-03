@@ -12,8 +12,8 @@
         <h5 class="card-title">Leichtes Quiz</h5>
         <p class="card-text">Teste dein Wissen mit einfachen Fragen.</p>
         <div id="end" class="text-right">
-          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
-        </div>
+          <a routerLink="/app-quiz" class="btn btn-primary" (click)="toggleQuiz(1)">Start</a>
+        </div>        
       </div>
     </div>
     <div class="quiz-card">
@@ -21,7 +21,7 @@
         <h5 class="card-title">Mittleres Quiz</h5>
         <p class="card-text">Die Herausforderung steigt! Versuche es mit mittelschweren Fragen.</p>
         <div id="end" class="text-right">
-          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
+          <a routerLink="/app-quiz" class="btn btn-primary" (click)="toggleQuiz(2)">Start</a>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
         <h5 class="card-title">Schweres Quiz</h5>
         <p class="card-text">Nimm die Herausforderung an und teste dein Wissen mit schwierigen Fragen.</p>
         <div id="end" class="text-right">
-          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
+          <a routerLink="/app-quiz" class="btn btn-primary" (click)="toggleQuiz(3)">Start</a>
         </div>
       </div>
     </div>
@@ -42,13 +42,12 @@
         <h5 class="card-title">Zufalls Quiz</h5>
         <p class="card-text">Stelle dein Können auf die Probe mit einer Mischung aus einfachen und schwierigen Fragen.</p>
         <div id="end" class="text-right">
-          <a routerLink="/app-quiz" class="btn btn-primary">Start</a>
+          <a routerLink="/app-quiz" class="btn btn-primary" (click)="toggleQuiz(4)">Start</a>
         </div>
       </div>
     </div>
   </div>
 </div>
- 
    <div class="divider" role="separator" aria-label="Divider"></div>
    <div class="letf-middel-side">
     <svg
