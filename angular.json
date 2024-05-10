@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "quizapp": {
+      "i18n": {
+        "sourceLocale": "de",
+        "locales": {
+          "en-US": "src/locale/messages.en.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +19,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": [
+              "en-US"
+            ],
             "outputPath": "dist/quizapp",
             "index": "src/index.html",
             "browser": "src/main.ts",
