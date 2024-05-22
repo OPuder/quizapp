@@ -19,9 +19,15 @@ export class TranslationService {
 
   // Methode zum Abrufen einer bestimmten Übersetzung anhand des Schlüssels
   getTranslation(key: string): string {
-    // Annahme: Die bevorzugte Sprache des Benutzers wird aus den Browserspracheinstellungen abgerufen
-    const userLanguage = navigator.language.split('-')[0]; // Erster Teil der Browsersprache, z.B. "en" für "en-US"
-    return this.translations[key]?.[userLanguage] || '';
+    const userLanguage = navigator.language.split('-')[0];
+    const [category, index, property] = key.split('.');
+  
+    if (this.translations[category] && this.translations[category][index]) {
+      const translation = this.translations[category][index][property];
+      return translation?.[userLanguage] || '';
+    }
+  
+    return '';
   }
 
   // Methode zum Speichern der geladenen Übersetzungsdaten

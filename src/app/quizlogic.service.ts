@@ -126,8 +126,8 @@ export class QuizlogicService {                                                 
         const antwortenKeys = this.Fragen[this.aktuelleFrageIndex].antwort;
         
         // Übersetze die Frage und die Antworten
-        this.aktuelleFrage = await this.translationService['translate'](frageKey);
-        this.aktuelleAntwort = await Promise.all(antwortenKeys.map(async (key) => await this.translationService['translate'](key)));
+        this.aktuelleFrage = this.translationService.getTranslation(frageKey);
+        this.aktuelleAntwort = antwortenKeys.map(key =>this.translationService.getTranslation(key));
       }
   
       // Weitere Logik für den Abschluss des Quiz oder übersprungene Fragen
