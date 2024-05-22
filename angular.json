@@ -20,6 +20,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "localize": [
+              //"de",
               "en-US"
             ],
             "outputPath": "dist/quizapp",

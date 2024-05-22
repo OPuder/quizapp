@@ -14,6 +14,7 @@ import { aEasy } from '../assets/AngularLeicht';                                
 import { aMidd } from '../assets/AngularMittel';                                               // Import von Angular-Mittelstufe-Fragen
 import { aHard } from '../assets/AngularSchwer';                                               // Import von Angular-Schwer-Fragen
 import { aZufall } from '../assets/AngularZufall';                                             // Import von zufälligen Angular-Fragen
+import { TranslationService } from './translation-service.service';
 
 @Injectable({                                                                                  // Injectable-Klasse
   providedIn: 'root'                                                                           // Das QuizlogicService wird als Singleton-Service im Root-Injector registriert
@@ -35,7 +36,7 @@ export class QuizlogicService {                                                 
   aktuelleFrage: string = "";                                                                  // Variable für die aktuelle Frage
   skipFrage: string = "";                                                                      // Variable für die übersprungene Frage
 
-  constructor() {}                                                                             // constructor der Klasse QuizlogicService
+  constructor(private translationService: TranslationService) { }                                                                        // constructor der Klasse QuizlogicService
 
   toggleQuiz(selectedCase: number) {                                                           // Methode zum Starten des Quizzes
     let selectedArray: Fragen[];                                                               // Deklaration einer lokalen Variablen für das ausgewählte Array von Fragen
@@ -118,24 +119,23 @@ export class QuizlogicService {                                                 
     console.log(this.initializeQuiz);                                                          // Konsolenausgabe zur Verifizierung, dass die Methode aufgerufen wurde
     console.log(this.Fragen);                                                                  // Konsolenausgabe des aktuellen Zustands der Fragenliste
   }
-  ladeFrage() {                                                                                // Methode zum Laden der Fragen
+  async ladeFrage() {
     try {
-    if (this.Fragen.length > this.aktuelleFrageIndex) {                                        // Überprüft ob alle Fragen durchgelaufen sind
-        this.aktuelleFrage = this.Fragen[this.aktuelleFrageIndex].frage;                       // Setzen der aktuellen Frage
-        this.aktuelleAntwort = this.Fragen[this.aktuelleFrageIndex].antwort;                   // Setzen der Antwortmöglichkeiten
+      if (this.Fragen.length > this.aktuelleFrageIndex) {
+        const frageKey = this.Fragen[this.aktuelleFrageIndex].frage;
+        const antwortenKeys = this.Fragen[this.aktuelleFrageIndex].antwort;
+        
+        // Übersetze die Frage und die Antworten
+        this.aktuelleFrage = await this.translationService['translate'](frageKey);
+        this.aktuelleAntwort = await Promise.all(antwortenKeys.map(async (key) => await this.translationService['translate'](key)));
       }
-      if (this.aktuelleFrageIndex === this.Fragen.length) {                                    // Überprüft, ob alle Fragen einmal angezeigt wurden
-        if (this.unbeantworteteFragen.length === this.skipFragenIndex) {                       // Überprüft ob es skipped Fragen gibt
-          this.quizAbgeschlossen = true;                                                       // Setzt Den Quiz abschluss auf true um das Ergebniss anzuzeigen
-        } else {
-          this.skipRunde = true;
-          this.skipFragen();                                                                   // Ruft die Funktion für die übersprungenden Fragen auf 
-        }
-      }
-    }catch (error) {
-      console.error('Fehler beim Laden der Fragen:',this.Fragen, error);                       // Fehlerbehandlung, falls das Laden der Fragen fehlschlägt
+  
+      // Weitere Logik für den Abschluss des Quiz oder übersprungene Fragen
+    } catch (error) {
+      console.error('Fehler beim Laden der Fragen:', this.Fragen, error);
     }
   }
+  
   fragenNummer(): number | string {                                                            // Methode zum Abrufen der aktuellen Fragennummer
     try {
       const gesamtanzahlFragen = this.Fragen.length;                                           // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
@@ -173,8 +173,8 @@ export class QuizlogicService {                                                 
   }
   nextFrage() {                                                                                // Methode zum Überspringen der aktuellen Frage
     try {
-      if (!this.Fragen[this.aktuelleFrageIndex].skip) {                                        // Überprüfen, ob die aktuelle Frage bereits übersprungen wurde
-        this.Fragen[this.aktuelleFrageIndex].skip = true;                                      // Falls nicht, markiere die Frage als übersprungen (skipped auf true setzen)
+      if (!this.Fragen[this.aktuelleFrageIndex].uebersprungen) {                                        // Überprüfen, ob die aktuelle Frage bereits übersprungen wurde
+        this.Fragen[this.aktuelleFrageIndex].uebersprungen = true;                                      // Falls nicht, markiere die Frage als übersprungen (skipped auf true setzen)
         this.unbeantworteteFragen.push(this.Fragen[this.aktuelleFrageIndex]);                  // Füge die Frage zur Liste der nicht beantworteten Fragen hinzu
         console.log("Skip Fragen Array", this.unbeantworteteFragen);                           // Zeige die Liste der nicht beantworteten Fragen in der Konsole an
       }
@@ -205,7 +205,7 @@ export class QuizlogicService {                                                 
   }
   neustart() {                                                                                 // Methode zum Neustarten des Quiz-
     this.Fragen.forEach((frage: Fragen) => {                                                   // Schleife durch alle Fragen des Arrays
-      frage.skip = false;                                                                      // Setze alle Fragen auf nicht Übersprungen
+      frage.uebersprungen = false;                                                                      // Setze alle Fragen auf nicht Übersprungen
     });                                                                                            
     this.skipRunde = false;                                                                    // Setze skipRunde auf false, um den Button "naechste Frage" zu aktivieren
     this.quizAbgeschlossen = false;                                                            // Setzen des Quizstatus auf nicht abgeschlossen

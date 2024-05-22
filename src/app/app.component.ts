@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
     if (isBrowser) {
       // Erkenne die Benutzersprache
-      const userLanguage = navigator.language || (navigator as any).userLanguage || 'de';
+      var userLanguage = navigator.language || (navigator as any).userLanguage || 'de';
 
       // Setze das lang-Attribut des html-Tags entsprechend der Benutzersprache
       document.documentElement.lang = userLanguage;
