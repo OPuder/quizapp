@@ -112,7 +112,7 @@ export class QuizlogicService {                                                 
       frage: this.translationService.getTranslation(f.frage),                                  // Übersetzten der Frage
       antwort: f.antwort.map(a => this.translationService.getTranslation(a))                   // Übersetzten der Antworten
     }));
-    console.log(this.Fragen);                                                                  // Konsolenausgabe der Fragenliste 
+    console.log('Übersetztes Array',this.Fragen);                                              // Konsolenausgabe der Fragenliste 
   } 
   initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
     this.aktuelleFrageIndex = 0;                                                               // Setze den Index der aktuellen Frage auf 0

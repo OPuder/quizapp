@@ -27,7 +27,7 @@
       }
     ]
   },
-  "en": {
+  "en-US": {
     "qSnipped": [
       {
         "frage": "How do I declare a variable in JavaScript (JS)?",
