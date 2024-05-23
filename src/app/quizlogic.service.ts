@@ -44,59 +44,59 @@ export class QuizlogicService {                                                 
     switch(selectedCase) {                                                                     // Verwendung eines switch-Statements, um das entsprechende Array von Fragen basierend auf dem ausgewählten Fall auszuwählen
       case 15:
         selectedArray = qSnipped;                                                              // Setze das ausgewählte Array auf das Quiz Snipped-Array
-        console.log(qSnipped);                                                                 // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                     // Konsolenausgabe des ausgewählten Arrays
         break;
       case 0:
         selectedArray = testFragen;                                                            // Setze das ausgewählte Array auf das Test-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 1:
         selectedArray = jEasy;                                                                 // Setze das ausgewählte Array auf das Leichte JavaScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 2:
         selectedArray = jMidd;                                                                 // Setze das ausgewählte Array auf das Mittlere JavaScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 3:
         selectedArray = jHard;                                                                 // Setze das ausgewählte Array auf das Schwere JavaScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 4:
         selectedArray = jZufall;                                                               // Setze das ausgewählte Array auf ein Zufällig gemischtes JavaScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 5:
         selectedArray = tEasy;                                                                 // Setze das ausgewählte Array auf das Leichte TypeScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 6:
         selectedArray = tMidd;                                                                 // Setze das ausgewählte Array auf das Mittlere TypeScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 7:
         selectedArray = tHard;                                                                 // Setze das ausgewählte Array auf das Schwere TypeScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 8:
         selectedArray = tZufall;                                                               // Setze das ausgewählte Array auf ein Zufällig gemischtes TypeScript-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 9:
         selectedArray = aEasy;                                                                 // Setze das ausgewählte Array auf das Leichte Angular-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 10:
         selectedArray = aMidd;                                                                 // Setze das ausgewählte Array auf das Mittlere Angular-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 11:
         selectedArray = aHard;                                                                 // Setze das ausgewählte Array auf das Schwere Angular-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       case 12:
         selectedArray = aZufall;                                                               // Setze das ausgewählte Array auf ein Zufällig gemischtes Angular-Array
-        console.log(selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
+        console.log('original Array nicht gemischt', selectedArray);                                                            // Konsolenausgabe des ausgewählten Arrays
         break;
       default:
         throw new Error('Ungültiger Fall ausgewählt');                                         // Fehlermeldung für den Fall, dass ein ungültiger Fall ausgewählt wurde
@@ -105,9 +105,17 @@ export class QuizlogicService {                                                 
     const zufallsFragen = [...selectedArray];                                                  // Kopiere das ausgewählte Array in ein neues Array
     zufallsFragen.sort(() => Math.random() - 0.5);                                             // Mische die Fragen im Array zufällig
     const zufälligeFragen15 = zufallsFragen.slice(0, 15);                                      // Wähle die ersten 15 Fragen aus dem gemischten Array aus
-    console.log(zufälligeFragen15);                                                            // Konsolenausgabe des Arrays mit 15 zufälligen Fragen
-    return console.log(zufallsFragen),this.Fragen = zufälligeFragen15;                         // Konsolenausgabe des gemischten Arrays und Zuweisung des gemischten Arrays zu den Fragen
-  }  
+    console.log('Aller Gemischte Fragen aus den Origninal',zufallsFragen);                     // Konsolenausgabe des gemischten Arrays 
+    console.log('Ausgewählten 15 Fragen', zufälligeFragen15);                                  // Konsolenausgabe der ersten 15 Fragen aus dem gemischten Array
+    this.Fragen = zufälligeFragen15;                                                           // Zuweisung des gemischten Arrays zu den Fragen
+    this.Fragen = zufälligeFragen15.map(f => ({
+      ...f,
+      frage: this.translationService.getTranslation(f.frage),
+      antwort: f.antwort.map(a => this.translationService.getTranslation(a))
+    }));
+    console.log(this.Fragen);
+  } 
+  
   initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
     this.aktuelleFrageIndex = 0;                                                               // Setze den Index der aktuellen Frage auf 0
     this.skipFragenIndex = 0;                                                                  // Setze den Index der übersprungenen Fragen auf 0
@@ -117,25 +125,26 @@ export class QuizlogicService {                                                 
     this.unbeantworteteFragen = [];                                                            // Setze die Liste der unbeantworteten Fragen auf ein leeres Array
     this.ladeFrage();                                                                          // Lade die erste Frage
     console.log(this.initializeQuiz);                                                          // Konsolenausgabe zur Verifizierung, dass die Methode aufgerufen wurde
-    console.log(this.Fragen);                                                                  // Konsolenausgabe des aktuellen Zustands der Fragenliste
+    console.log('Fragen die im Quiz Angezeigt werden',this.Fragen);                                                                  // Konsolenausgabe des aktuellen Zustands der Fragenliste
   }
-  async ladeFrage() {
+  ladeFrage() {                                                                                // Methode zum Laden der Fragen
     try {
-      if (this.Fragen.length > this.aktuelleFrageIndex) {
-        const frageKey = this.Fragen[this.aktuelleFrageIndex].frage;
-        const antwortenKeys = this.Fragen[this.aktuelleFrageIndex].antwort;
-        
-        // Übersetze die Frage und die Antworten
-        this.aktuelleFrage = this.translationService.getTranslation(frageKey);
-        this.aktuelleAntwort = antwortenKeys.map(key =>this.translationService.getTranslation(key));
+    if (this.Fragen.length > this.aktuelleFrageIndex) {                                        // Überprüft ob alle Fragen durchgelaufen sind
+        this.aktuelleFrage = this.Fragen[this.aktuelleFrageIndex].frage;                       // Setzen der aktuellen Frage
+        this.aktuelleAntwort = this.Fragen[this.aktuelleFrageIndex].antwort;                   // Setzen der Antwortmöglichkeiten
       }
-  
-      // Weitere Logik für den Abschluss des Quiz oder übersprungene Fragen
-    } catch (error) {
-      console.error('Fehler beim Laden der Fragen:', this.Fragen, error);
+      if (this.aktuelleFrageIndex === this.Fragen.length) {                                    // Überprüft, ob alle Fragen einmal angezeigt wurden
+        if (this.unbeantworteteFragen.length === this.skipFragenIndex) {                       // Überprüft ob es skipped Fragen gibt
+          this.quizAbgeschlossen = true;                                                       // Setzt Den Quiz abschluss auf true um das Ergebniss anzuzeigen
+        } else {
+          this.skipRunde = true;
+          this.skipFragen();                                                                   // Ruft die Funktion für die übersprungenden Fragen auf 
+        }
+      }
+    }catch (error) {
+      console.error('Fehler beim Laden der Fragen:',this.Fragen, error);                       // Fehlerbehandlung, falls das Laden der Fragen fehlschlägt
     }
   }
-  
   fragenNummer(): number | string {                                                            // Methode zum Abrufen der aktuellen Fragennummer
     try {
       const gesamtanzahlFragen = this.Fragen.length;                                           // Gesamnteanzahl an Fragen (Fragen + skip Fragen)
@@ -213,8 +222,8 @@ export class QuizlogicService {                                                 
     this.aktuelleFrageIndex = 0;                                                               // Zurücksetzen des Frageindex
     this.skipFragenIndex = 0;                                                                  // Zurücksetzen der skipFragenIndex
     this.punktzahl = 0;                                                                        // Zurücksetzen der Punktzahl
-    this.ladeFrage();                                                                          // Laden der Fragen für einen Neustart
     this.Fragen = this.Fragen.sort(() => Math.random() - 0.5);                                 // Neuladen der Fragen in zufallige Reihenfolge
-    console.log("Neustart des Quiz", this.unbeantworteteFragen, "die fragen aus dem quiz",this.Fragen,this.zufälligeFragen15,this.zufallsFragen)                   // Ausgabe der Fragen und der nicht beantworteten Fragen in der Konsole
+    this.ladeFrage();                                                                          // Laden der Fragen für einen Neustart
+    console.log("Neustart des Quiz",'unbeanrtete Fragen->', this.unbeantworteteFragen, "die fragen aus dem quiz",this.Fragen)                   // Ausgabe der Fragen und der nicht beantworteten Fragen in der Konsole
   }
 }
