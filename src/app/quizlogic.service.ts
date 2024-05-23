@@ -108,11 +108,11 @@ export class QuizlogicService {                                                 
     console.log('Aller Gemischte Fragen aus den Origninal',zufallsFragen);                     // Konsolenausgabe des gemischten Arrays 
     console.log('Ausgewählten 15 Fragen', zufälligeFragen15);                                  // Konsolenausgabe der ersten 15 Fragen aus dem gemischten Array
     this.Fragen = zufälligeFragen15;                                                           // Zuweisung des gemischten Arrays zu den Fragen
-    this.Fragen = zufälligeFragen15.map(f => ({
-      ...f,
-      frage: this.translationService.getTranslation(f.frage),
-      antwort: f.antwort.map(a => this.translationService.getTranslation(a))
-    }));
+    // this.Fragen = zufälligeFragen15.map(f => ({
+    //   ...f,
+    //   frage: this.translationService.getTranslation(f.frage),
+    //   antwort: f.antwort.map(a => this.translationService.getTranslation(a))
+    // }));
     console.log(this.Fragen);
   } 
   

@@ -18,16 +18,7 @@
       "2672361839177532065": "Dependency Injection in Angular facilitates the management of dependencies between components and improves the testability and maintainability of the code.",
       "5357263600632882864": "Routing in Angular organizes different views in single-page applications, enhancing user experience without reloading the page.",
       "757044598461853389": "Angular also offers server-side rendering of web applications, improving performance and search engine optimization.",
-      "4417468339535237074": "TypeScript enables the use of modern JavaScript features like classes, modules, and arrow functions, while simultaneously improving code quality through early detection of type errors.",
-      "123456789": "How do I declare a variable in JavaScript (JS)?",
-      "234567890": "Which brackets are used for a method?",
-      "345678901": "none",
-      "456789012": "What is the first number in an array?",
-      "567890123": "Are Java and JavaScript the same?",
-      "678901234": "No",
-      "789012345": "Similar",
-      "890123456": "Yes",
-      "901234567": "Doesn't matter"
+      "4417468339535237074": "TypeScript enables the use of modern JavaScript features like classes, modules, and arrow functions, while simultaneously improving code quality through early detection of type errors."
     }
   }
   

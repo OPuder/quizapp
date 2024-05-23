@@ -2,6 +2,8 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslationService } from './translation-service.service'
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   title = 'get started';
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private translationService: TranslationService) {}
 
   ngOnInit(): void {
     this.setDocumentLanguage();
@@ -36,5 +38,7 @@ export class AppComponent implements OnInit {
     } else {
       console.log('Dies ist keine Browser-Umgebung.');
     }
+    console.log('Translations loaded?!?!?!?! ',this.translationService.getTranslation('qSnipped.0.frage'));
   }
 }
+

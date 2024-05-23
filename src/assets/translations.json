@@ -18,7 +18,7 @@
         "antwort": ["6", "1", "10", "0"],
         "correctAntwort": 3,
         "uebersprungen": false
-      },
+      }, 
       {
         "frage": "Sind Java und JavaScript dasselbe?",
         "antwort": ["Nein", "Ähnlich", "Ja", "Egal"],
