@@ -14,12 +14,13 @@ import { TranslationService } from './translation-service.service'
 })
 export class AppComponent implements OnInit {
   title = 'get started';
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private translationService: TranslationService) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private translationService: TranslationService) {}
 
   ngOnInit(): void {
     this.setDocumentLanguage();
   }
-
   setDocumentLanguage(): void {
     // Überprüfen, ob der Code im Browser läuft
     const isBrowser = isPlatformBrowser(this.platformId);
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
 
     if (isBrowser) {
       // Erkenne die Benutzersprache
-      var userLanguage = navigator.language || (navigator as any).userLanguage || 'de';
+      var userLanguage = navigator.language || (navigator as any).userLanguage || 'de-CH'
 
       // Setze das lang-Attribut des html-Tags entsprechend der Benutzersprache
       document.documentElement.lang = userLanguage;
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
     } else {
       console.log('Dies ist keine Browser-Umgebung.');
     }
-    console.log('Translations loaded?!?!?!?! ',this.translationService.getTranslation('qSnipped.0.frage'));
+    console.log('Translations: ',this.translationService.getTranslation('qSnipped.0.frage'));
   }
 }
 
