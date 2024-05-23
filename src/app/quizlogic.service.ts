@@ -36,8 +36,7 @@ export class QuizlogicService {                                                 
   aktuelleFrage: string = "";                                                                  // Variable für die aktuelle Frage
   skipFrage: string = "";                                                                      // Variable für die übersprungene Frage
 
-  constructor(private translationService: TranslationService) { }                                                                        // constructor der Klasse QuizlogicService
-
+  constructor(private translationService: TranslationService) { }                              // constructor der Klasse QuizlogicService
   toggleQuiz(selectedCase: number) {                                                           // Methode zum Starten des Quizzes
     let selectedArray: Fragen[];                                                               // Deklaration einer lokalen Variablen für das ausgewählte Array von Fragen
   
@@ -108,14 +107,13 @@ export class QuizlogicService {                                                 
     console.log('Aller Gemischte Fragen aus den Origninal',zufallsFragen);                     // Konsolenausgabe des gemischten Arrays 
     console.log('Ausgewählten 15 Fragen', zufälligeFragen15);                                  // Konsolenausgabe der ersten 15 Fragen aus dem gemischten Array
     this.Fragen = zufälligeFragen15;                                                           // Zuweisung des gemischten Arrays zu den Fragen
-    // this.Fragen = zufälligeFragen15.map(f => ({
-    //   ...f,
-    //   frage: this.translationService.getTranslation(f.frage),
-    //   antwort: f.antwort.map(a => this.translationService.getTranslation(a))
-    // }));
-    console.log(this.Fragen);
+    this.Fragen = zufälligeFragen15.map(f => ({                                                // Weise der Variable this.Fragen das Ergebnis der map()-Methode auf zufälligeFragen15 zu dabei wird für jedes Element f in eine Funktion ausgeführt
+      ...f,                                                                                    // Kopiert ALLE Eigenschaften des Arrays zufälligeFragen15 mit hilfe der Spread-Syntax
+      frage: this.translationService.getTranslation(f.frage),                                  // Übersetzten der Frage
+      antwort: f.antwort.map(a => this.translationService.getTranslation(a))                   // Übersetzten der Antworten
+    }));
+    console.log(this.Fragen);                                                                  // Konsolenausgabe der Fragenliste 
   } 
-  
   initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
     this.aktuelleFrageIndex = 0;                                                               // Setze den Index der aktuellen Frage auf 0
     this.skipFragenIndex = 0;                                                                  // Setze den Index der übersprungenen Fragen auf 0
