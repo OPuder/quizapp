@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
       console.log('Dies ist keine Browser-Umgebung.');                                                            // Ausgabe, wenn es keine Browser-Umgebung ist
     }
       if (this.translationService.translations) {                                                                 // Prüfen Sie, ob Übersetzungen geladen sind
-     console.log('Ausgabe der ersten Übersetzung: ', this.translationService.getTranslation("qSnipped.0.frage"));// Ausgabe der ersten Übersetzung
+      console.log('Ausgabe der ersten Übersetzung: ', this.translationService.getTranslation("qSnipped.0.frage"));// Ausgabe der ersten Übersetzung
     } else {
       console.warn(' Übersetzungen noch nicht geladen!');                                                         // Ausgabe, wenn die Übersetzungen noch nicht geladen sind
     }

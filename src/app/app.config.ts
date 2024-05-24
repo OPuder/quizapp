@@ -5,5 +5,5 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch()), { provide: LOCALE_ID, useValue: 'en-US' }]
+  providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch()), { provide: LOCALE_ID, useValue: 'de-DE' }]
 };
