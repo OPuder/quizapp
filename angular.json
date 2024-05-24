@@ -5,7 +5,7 @@
   "projects": {
     "quizapp": {
       "i18n": {
-        "sourceLocale": "de",
+        "sourceLocale": "de-DE",
         "locales": {
           "en-US": "src/locale/messages.en.json"
         }
@@ -20,7 +20,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "localize": [
-              //"de",
+             // "de-DE",
               "en-US"
             ],
             "outputPath": "dist/quizapp",
