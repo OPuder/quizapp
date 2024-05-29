@@ -14,16 +14,14 @@ import { LOCALE_ID } from '@angular/core';                                      
 })
 export class AppComponent implements OnInit {
   title = 'get started';                                                                                        // Titel der Startseite
-  translations: any;                                                                                            // Variable zum Speichern der Übersetzungen
-  constructor(                                                                                                  // Konstruktor
+   constructor(                                                                                                  // Konstruktor
     @Inject(PLATFORM_ID) private platformId: Object,                                                            // Inject der PLATFORM_ID
     private translationService: TranslationService,                                                             // Inject der TranslationService
     private http: HttpClient,                                                                                    // Inject der HttpClient
     @Inject(LOCALE_ID) private localeId: string                                                                 // Inject der LOCALE_ID
 ) {}
 
-  ngOnInit(): void {                                                                                            // Lifecycle-Funktion, die beim Laden der Komponente aufgerufen wird
-    this.loadTranslations();                                                                                    // Aufruf der Methode, um die Übersetzungen zu laden
+  ngOnInit(): void {                                                                                            // Lifecycle-Funktion, die beim Laden der Komponente aufgerufen wird                      
     this.setDocumentLanguage();                                                                                 // Aufruf der Methode, um die Sprache des Dokuments zu setzen
   }
   setDocumentLanguage(): void {
@@ -39,19 +37,6 @@ export class AppComponent implements OnInit {
     } else {
       console.log('Dies ist keine Browser-Umgebung.');                                                            // Ausgabe, wenn es keine Browser-Umgebung ist
     }
-      if (this.translationService.translations) {                                                                 // Prüfen Sie, ob Übersetzungen geladen sind
-      console.log('Ausgabe der ersten Übersetzung: ', this.translationService.getTranslation("qSnipped.0.frage"));// Ausgabe der ersten Übersetzung
-    } else {
-      console.warn(' Übersetzungen noch nicht geladen!');                                                         // Ausgabe, wenn die Übersetzungen noch nicht geladen sind
-    }
-  }
-  private loadTranslations() {
-    this.http.get('assets/translations.json')
-      .subscribe(data => {
-        this.translations = data;
-      }, error => {
-        console.error('Fehler beim Laden der Übersetzungen:', error);
-      });
   }
 }
 

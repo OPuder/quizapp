@@ -4,3 +4,4 @@ export interface Fragen {              // Exportierte Schnittstelle Fragen für 
   correctAntwort: number;              // Der Index der korrekten Antwort im Antwort-Array
   uebersprungen: boolean;                       // Ein Boolean-Wert, der angibt, ob die Frage übersprungen wurde
 }
+

@@ -15,6 +15,8 @@ import { aMidd } from '../assets/AngularMittel';                                
 import { aHard } from '../assets/AngularSchwer';                                               // Import von Angular-Schwer-Fragen
 import { aZufall } from '../assets/AngularZufall';                                             // Import von zufälligen Angular-Fragen
 import { TranslationService } from './translation-service.service';                            // Import der TranslationService
+import { map } from 'rxjs/operators';
+
 @Injectable({                                                                                  // Injectable-Klasse
   providedIn: 'root'                                                                           // Das QuizlogicService wird als Singleton-Service im Root-Injector registriert
 })
@@ -41,9 +43,22 @@ export class QuizlogicService {                                                 
   
     switch(selectedCase) {                                                                     // Verwendung eines switch-Statements, um das entsprechende Array von Fragen basierend auf dem ausgewählten Fall auszuwählen
       case 15:
-        selectedArray = qSnipped;                                                              // Setze das ausgewählte Array auf das Quiz Snipped-Array
-        console.log('original Array nicht gemischt', selectedArray);                           // Konsolenausgabe des ausgewählten Arrays
+        this.translationService.getTranslation('qSnipped').pipe(
+          map((fragen: Fragen[]) => {
+            selectedArray = fragen ?? [];
+            console.log('original Array nicht gemischt', selectedArray);
+            const zufallsFragen = [...selectedArray]; // Erzeuge eine Kopie des Arrays
+            this.zufallsFragen = zufallsFragen;
+          })
+         ).subscribe(
+          () => {},
+          error => console.error('Fehler beim Laden der Übersetzungen:', error)
+        );
         break;
+      // case 15:
+      //   selectedArray = qSnipped ?? [];                                                              // Setze das ausgewählte Array auf das Quiz Snipped-Array
+      //   console.log('original Array nicht gemischt', selectedArray);                           // Konsolenausgabe des ausgewählten Arrays
+      //   break;
       case 0:
         selectedArray = testFragen;                                                            // Setze das ausgewählte Array auf das Test-Array
         console.log('original Array nicht gemischt', selectedArray);                           // Konsolenausgabe des ausgewählten Arrays
@@ -100,17 +115,14 @@ export class QuizlogicService {                                                 
         throw new Error('Ungültiger Fall ausgewählt');                                         // Fehlermeldung für den Fall, dass ein ungültiger Fall ausgewählt wurde
     }
   
-    const zufallsFragen = [...selectedArray];                                                  // Kopiere das ausgewählte Array in ein neues Array
-    zufallsFragen.sort(() => Math.random() - 0.5);                                             // Mische die Fragen im Array zufällig
-    const zufälligeFragen15 = zufallsFragen.slice(0, 15);                                      // Wähle die ersten 15 Fragen aus dem gemischten Array aus
-    console.log('Aller Gemischte Fragen aus den Origninal',zufallsFragen);                     // Konsolenausgabe des gemischten Arrays 
+    //const zufallsFragen = [...selectedArray];                                                  // Kopiere das ausgewählte Array in ein neues Array
+    this.zufallsFragen.sort(() => Math.random() - 0.5);                                             // Mische die Fragen im Array zufällig
+    const zufälligeFragen15 = this.zufallsFragen.slice(0, 15);                                      // Wähle die ersten 15 Fragen aus dem gemischten Array aus
+    console.log('Aller Gemischte Fragen aus den Origninal',this.zufallsFragen);                     // Konsolenausgabe des gemischten Arrays 
     console.log('Ausgewählten 15 Fragen', zufälligeFragen15);                                  // Konsolenausgabe der ersten 15 Fragen aus dem gemischten Array
     this.Fragen = zufälligeFragen15;                                                           // Zuweisung des gemischten Arrays zu den Fragen
-    this.Fragen = zufälligeFragen15.map(f => ({                                                // Weise der Variable this.Fragen das Ergebnis der map()-Methode auf zufälligeFragen15 zu dabei wird für jedes Element f in eine Funktion ausgeführt
-      ...f,                                                                                    // Kopiert ALLE Eigenschaften des Arrays zufälligeFragen15 mit hilfe der Spread-Syntax
-      frage: this.translationService.getTranslation(f.frage),                                  // Übersetzten der Frage
-      antwort: f.antwort.map(a => this.translationService.getTranslation(a))                   // Übersetzten der Antworten
-    }));
+   
+
     console.log('Übersetztes Array',this.Fragen);                                              // Konsolenausgabe der Fragenliste 
   } 
   initializeQuiz() {                                                                           // Methode zum Initialisieren des Quizzes
@@ -121,7 +133,7 @@ export class QuizlogicService {                                                 
     this.skipRunde = false;                                                                    // Setze den Status der Übersprung-Runde auf false
     this.unbeantworteteFragen = [];                                                            // Setze die Liste der unbeantworteten Fragen auf ein leeres Array
     this.ladeFrage();                                                                          // Lade die erste Frage
-    console.log(this.initializeQuiz);                                                          // Konsolenausgabe zur Verifizierung, dass die Methode aufgerufen wurde
+   // console.log(this.initializeQuiz);                                                          // Konsolenausgabe zur Verifizierung, dass die Methode aufgerufen wurde
     console.log('Fragen die im Quiz Angezeigt werden',this.Fragen);                            // Konsolenausgabe des aktuellen Zustands der Fragenliste
   }
   ladeFrage() {                                                                                // Methode zum Laden der Fragen
