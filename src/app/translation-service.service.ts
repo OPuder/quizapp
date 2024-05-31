@@ -22,7 +22,7 @@ currentLanguage: string = '';                                                   
   }
   setLanguage(language: string) {                                                                                   // Methode zum Setzen der Sprache
     this.currentLanguage = language;                                                                                // Setze die aktuelle Sprache
-    console.log('Sprache geändert zu:', this.currentLanguage);                                                      // Ausgabe der aktuellen Sprache in der Konsole
+    console.log('Sprache geändert nach dem Browser  zu:', this.currentLanguage);                                    // Ausgabe der aktuellen Sprache in der Konsole
   }
   getTranslation(key: string): Observable<Fragen[]> {                                                               // Methode zum Abrufen der Übersetzung mit eine bestimmte Schlüssel
     return new Observable<Fragen[]>(observer => {                                                                   // Erstelle ein Observable-Objekt, um die Übersetzung zu empfangen
