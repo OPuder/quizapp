@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { response } from 'express';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -14,22 +15,22 @@ private http = inject(HttpClient);                                              
 
   constructor() { }
 
-  login(user:{username:string, password:string}):Observable<any> {
-    return this.http.post('/api/login', user).pipe(
-      tap(tokens => this.doLoginUser(user.username, tokens)),
+  login(user:{username:string, password:string}):Observable<any> {                                        // Observable der angibt, dass der Benutzer angemeldet ist          
+    return this.http.post('https://dummyjson.com/auth/login', user).pipe(                                 // Verwendung der HttpClient-Klasse und des Post-Requests
+      tap((response: any) => this.doLoginUser(user.username, response.token)),                            // tap-Methode, die angibt, dass der Benutzer angemeldet ist
     );
   }
-  doLoginUser(username: string, tokens: any) {
-    this.loggedUser = username;
-    this.storeJwtTokens(tokens.jwt);
-    this.isAuthenticated.next(true);
+  doLoginUser(username: string, token: any) {                                                            // Methode, die angibt, dass der Benutzer angemeldet ist
+    this.loggedUser = username;                                                                          // Speichern des angemeldeten Users im LocalStorage
+    this.storeJwtTokens(token.jwt);                                                                      // Speichern des JWT Tokens im LocalStorage
+    this.isAuthenticated.next(true);                                                                     // BehaviorSubject, der angibt, dass der Benutzer angemeldet ist
   }
-  storeJwtTokens(jwt: string) {
-    localStorage.setItem(this.JWT_TOKEN, jwt);
+  storeJwtTokens(jwt: string) {                                                                           // Methode, die Speichert den JWT Tokens im LocalStorage
+    localStorage.setItem(this.JWT_TOKEN, jwt);                                                           
   }
-  logout() {
-    localStorage.removeItem(this.JWT_TOKEN);
-    this.isAuthenticated.next(false);
+  logout() {                                                                                              // Methode, die den Benutzer abmeldet
+    localStorage.removeItem(this.JWT_TOKEN);                                                              // Removen des JWT Tokens aus dem LocalStorage
+    this.isAuthenticated.next(false);                                                                     // BehaviorSubject, der angibt, dass der Benutzer nicht angemeldet ist
   }
-  
+
 }

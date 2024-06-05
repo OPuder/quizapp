@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from './Authentication/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,4 +10,16 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
-}
+  authService = inject(AuthService);
+  constructor() {
+    this.authService
+    .login({
+      username: 'emilys',
+      password: 'emilyspass'})
+      .subscribe((r) => {
+        console.log(r);
+      }
+      );
+  }
+ }
+
