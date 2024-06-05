@@ -32,5 +32,13 @@ private http = inject(HttpClient);                                              
     localStorage.removeItem(this.JWT_TOKEN);                                                              // Removen des JWT Tokens aus dem LocalStorage
     this.isAuthenticated.next(false);                                                                     // BehaviorSubject, der angibt, dass der Benutzer nicht angemeldet ist
   }
+  getcurrentAuthUser(){
+    let token = localStorage.getItem(this.JWT_TOKEN);
+    return this.http.get('https://dummyjson.com/auth/me',{
+      headers: {
+        Authorization: `Bearer ` + token,
+      },
+    });
+  }
 
 }

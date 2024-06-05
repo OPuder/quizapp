@@ -46,7 +46,7 @@ export const routes: Routes = [
     },
     {
         path: 'app-login',
-        loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
+        loadComponent: () => import('./login/login/login.component').then(m => m.LoginComponent),
     },
     {
         path: 'app-quizauswahl',
