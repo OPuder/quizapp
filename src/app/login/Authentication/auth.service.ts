@@ -30,9 +30,9 @@ private http = inject(HttpClient);                                              
     this.storeJwtToken(token);                                                                      // Speichern des JWT Tokens im LocalStorage
     this.isAuthenticated.next(true);                                                                     // BehaviorSubject, der angibt, dass der Benutzer angemeldet ist
   }
-  private storeJwtToken(token: string) {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(this.JWT_TOKEN, token);
+  private storeJwtToken(token: string) {                                                                  // Methode, die den JWT Token im LocalStorage speichert
+    if (typeof localStorage !== 'undefined') {                                                            // Prüfen, ob der LocalStorage verfügbar ist
+      localStorage.setItem(this.JWT_TOKEN, token);                                                        // Speichern des JWT Tokens im LocalStorage
     }
   }
   logout() {                                                                                              // Methode, die den Benutzer abmeldet
