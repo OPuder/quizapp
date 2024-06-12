@@ -12,9 +12,9 @@ currentLanguage: string = '';                                                   
   
   constructor(private http: HttpClient) {                                                                           // Konstruktor
     this.loadTranslations().subscribe((data: any) => {                                                              // Lade die Übersetzungsdaten beim Erstellen der Instanz des TranslationService
-      console.log('translations DATA', data);                                                                       // Ausgabe der geladenen Übersetzungsdaten in der Konsole
+     // console.log('translations DATA', data);                                                                       // Ausgabe der geladenen Übersetzungsdaten in der Konsole
       this.translations = data;                                                                                     // Hier werden die geladenen Übersetzungsdaten in die translations-Eigenschaft gespeichert
-      console.log(' Übersetzungen geladen:', this.translations);                                                    // Ausgabe der geladenen Übersetzungsdaten in der Konsole
+     // console.log(' Übersetzungen geladen:', this.translations);                                                    // Ausgabe der geladenen Übersetzungsdaten in der Konsole
    });
   }
   loadTranslations(): Observable<any> {                                                                             //  Lade die JSON-Datei über HTTP-Request
@@ -22,7 +22,7 @@ currentLanguage: string = '';                                                   
   }
   setLanguage(language: string) {                                                                                   // Methode zum Setzen der Sprache
     this.currentLanguage = language;                                                                                // Setze die aktuelle Sprache
-    console.log('Sprache geändert nach dem Browser  zu:', this.currentLanguage);                                    // Ausgabe der aktuellen Sprache in der Konsole
+   // console.log('Sprache geändert nach dem Browser  zu:', this.currentLanguage);                                    // Ausgabe der aktuellen Sprache in der Konsole
   }
   getTranslation(key: string): Observable<Fragen[]> {                                                               // Methode zum Abrufen der Übersetzung mit eine bestimmte Schlüssel
     return new Observable<Fragen[]>(observer => {                                                                   // Erstelle ein Observable-Objekt, um die Übersetzung zu empfangen

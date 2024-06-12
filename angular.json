@@ -5,9 +5,10 @@
   "projects": {
     "quizapp": {
       "i18n": {
-        "sourceLocale": "de-DE",
+        "sourceLocale": "de",
         "locales": {
-          "en-US": "src/locale/messages.en.json"
+          "en-US": "src/locale/messages.en.json",
+          "de-DE": "src/locale/messages.de.json"
         }
       },
       "projectType": "application",
