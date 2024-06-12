@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
-import { AuthService } from '../../login/Authentication/auth.service';
+import { AuthService } from '../../login/AuthService/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({

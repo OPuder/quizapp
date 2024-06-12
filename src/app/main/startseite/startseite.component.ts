@@ -1,8 +1,8 @@
-import { QuizlogicService } from './../../quizlogic.service';                                     // Import der Service-Klasse
+import { QuizlogicService } from '../../quiz/quizlogic.service';                                  // Import der Service-Klasse
 import { RouterLink, RouterLinkActive } from '@angular/router';                                   // Import der Router-Klassen
 import { CommonModule } from '@angular/common';                                                   // Import des CommonModule
 import { Component } from '@angular/core';                                                        // Import der Komponenten-Klasse
-import { QuizSnippedComponent } from "../../quiz-snipped/quiz-snipped.component";                 // Import der QuizSnipped-Komponente
+import { QuizSnippedComponent } from '../../quiz/quiz-snipped/quiz-snipped.component';            // Import der QuizSnipped-Komponente
 
 @Component({                                                                                      // Deklaration der Startseite-Komponente
   selector: 'app-startseite',                                                                     // Selector für die Startseite-Komponente

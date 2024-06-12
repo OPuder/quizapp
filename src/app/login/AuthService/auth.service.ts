@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap, } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +44,16 @@ constructor(private http: HttpClient) {}
   isLoggedIn() {                                                                                          // Methode, die angibt, ob der Benutzer angemeldet ist
     return !!localStorage.getItem('JWT_TOKEN');                                                           // Prüfen, ob der JWT Token im LocalStorage vorhanden ist
   }
+  isTokenExpired() {                                                                                       // Methode, die angibt, ob der Token abgelaufen ist
+    const token =localStorage.getItem('JWT_TOKEN');                                                        // Auslesen des JWT Tokens aus dem LocalStorage
+    if (!token) {                                                                                          // Prüfen, ob der JWT Token vorhanden ist
+      return true;                                                                                         // Wenn der JWT Token nicht vorhanden ist, wird true zurückgeliefert
+    }
+    const decoded = jwtDecode(token);                                                                      // Decodieren des JWT Tokens
+    if (!decoded.exp) {                                                                                    // Prüfen, ob das Decodieren des JWT Tokens erfolgreich war
+      return true;                                                                                         // Wenn das Decodieren des JWT Tokens nicht erfolgreich war, wird true zurückgeliefert
+    }                                                                                      
+      const expirationDate = decoded.exp * 1000;                                                           // Auslesen der Verfallszeit des JWT Tokens
+                                                                 
+}
 }

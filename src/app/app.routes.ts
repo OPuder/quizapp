@@ -18,7 +18,7 @@ export const routes: Routes = [
     },
     {
         path: 'app-quiz',                                                                // Routenkonfiguration für die Quiz-Komponente
-        loadComponent: () => import('./quiz/quiz.component').then(m => m.QuizComponent)
+        loadComponent: () => import('./quiz/quiz/quiz.component').then(m => m.QuizComponent)
     },
   //                                                                                    // Weitere Routenkonfigurationen für verschiedene Seiten der Anwendung...
     {

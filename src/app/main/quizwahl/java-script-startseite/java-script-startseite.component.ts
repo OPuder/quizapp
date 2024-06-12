@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { QuizComponent } from '../../../quiz/quiz.component';
+import { QuizComponent } from '../../../quiz/quiz/quiz.component';
 import { RouterLink } from '@angular/router';
-import { QuizlogicService } from '../../../quizlogic.service';
+import { QuizlogicService } from '../../../quiz/quizlogic.service';
 
 
 

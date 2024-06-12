@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';                                             // Import von Component und OnInit aus dem Angular-Core
 import { CommonModule } from '@angular/common';                                                // Import des CommonModule aus Angular für die gemeinsame Verwendung
-import { QuizlogicService } from '../quizlogic.service';
+import { QuizlogicService } from '../../quiz/quizlogic.service';
 
 @Component({
   selector: 'app-quiz-Snipped',                                                                // Der Selctor Name zum Aufrufen der Komponente 

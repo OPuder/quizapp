@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';                                                                         // Import der Injectable-Klasse
 import { HttpClient } from '@angular/common/http';                                                                  // Import der HttpClient-Klasse
 import { Observable } from 'rxjs';                                                                                  // Import der Observable-Klasse
-import { Fragen } from './fragen';                                                                                  // Import der Fragen-Klasse
+import { Fragen } from './quiz/fragen';                                                                                  // Import der Fragen-Klasse
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { Component, inject, Inject, OnInit, PLATFORM_ID } from '@angular/core'; 
 import { CommonModule, isPlatformBrowser } from '@angular/common';                                               // Import von CommonModule und isPlatformBrowser aus Angular
 import { HttpClientModule, HttpClient} from '@angular/common/http';                                              // Import von HttpClientModule aus Angular
 import { TranslationService } from './translation-service.service'                                               // Import von TranslationService aus translation-service.service
-import { AuthService } from './login/Authentication/auth.service';
+import { AuthService } from './login/AuthService/auth.service';
 
 
 @Component({

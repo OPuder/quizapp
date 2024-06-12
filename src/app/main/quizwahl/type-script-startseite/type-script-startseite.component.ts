@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { QuizlogicService } from '../../../quizlogic.service';
+import { QuizlogicService } from '../../../quiz/quizlogic.service';
 
 @Component({
   selector: 'app-type-script-startseite',
