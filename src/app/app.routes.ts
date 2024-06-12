@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';                                                 // Import der Angular-Routing-Klasse
+import { authGuard } from './login/authGuard/auth.guard';
 
 // Definition der Routing-Konfiguration für die Angular-Anwendung
 export const routes: Routes = [
@@ -19,7 +20,7 @@ export const routes: Routes = [
         path: 'app-quiz',                                                                // Routenkonfiguration für die Quiz-Komponente
         loadComponent: () => import('./quiz/quiz.component').then(m => m.QuizComponent)
     },
-  //                                                                      // Weitere Routenkonfigurationen für verschiedene Seiten der Anwendung...
+  //                                                                                    // Weitere Routenkonfigurationen für verschiedene Seiten der Anwendung...
     {
         path: 'app-wissenwertes',
         loadComponent: () => import('./main/wissenwertes/wissenwertes.component').then(m => m.WissenwertesComponent),
@@ -43,6 +44,7 @@ export const routes: Routes = [
     {
         path: 'app-score-board',
         loadComponent: () => import('./main/score-board/score-board.component').then(m => m.ScoreBoardComponent),
+        canActivate: [authGuard]                                                          // Verwendung der AuthGuard-Klasse
     },
     {
         path: 'app-login',

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap, } from 'rxjs';
@@ -7,23 +8,23 @@ import { BehaviorSubject, Observable, tap, } from 'rxjs';
 })
 export class AuthService {
 
-private readonly JWT_TOKEN = 'JWT_TOKEN';                                                                 // JWT token, der im LocalStorage gespeichert wird
-private loggedUser? : string;                                                                             // Name des angemeldeten Users, der im LocalStorage gespeichert wird
-private isAuthenticated = new BehaviorSubject<boolean>(false);                                            // BehaviorSubject, der angibt, ob der Benutzer angemeldet ist
-//private http = inject(HttpClient);                                                                        // Inject der HttpClient-Klasse
+private readonly JWT_TOKEN = 'JWT_TOKEN';                                                                // JWT token, der im LocalStorage gespeichert wird
+private loggedUser? : string;                                                                            // Name des angemeldeten Users, der im LocalStorage gespeichert wird
+private isAuthenticated = new BehaviorSubject<boolean>(false);                                           // BehaviorSubject, der angibt, ob der Benutzer angemeldet ist
+private Router=inject(Router);
 
 constructor(private http: HttpClient) {}
 
-  login(user:{username:string, password:string}):Observable<any> {                                        // Observable der angibt, dass der Benutzer angemeldet ist          
+  login(user:{email:string, password:string}):Observable<any> {                                          // Observable der angibt, dass der Benutzer angemeldet ist          
     return this.http
-      .post('https://dummyjson.com/auth/login', user)
-      .pipe(                                                                                               // Verwendung der HttpClient-Klasse und des Post-Requests
-        tap((res: any) => this.doLoginUser(user.username, res.token)),                                     // tap-Methode, die angibt, dass der Benutzer angemeldet ist
+      .post('https://api.escuelajs.co/api/v1/auth/login', user)                                          // Verwendung der HttpClient-Klasse und des Post-Requests
+      .pipe(                                                                                             // Verwendung der Pipe-Methode, um das Observable zu transformieren
+        tap((tokens: any) => this.doLoginUser(user.email, tokens.access_token)),                         // tap-Methode, die angibt, dass der Benutzer angemeldet ist
       );
     }
-  private doLoginUser(username: string, token: any) {                                                            // Methode, die angibt, dass der Benutzer angemeldet ist
-    this.loggedUser = username;                                                                          // Speichern des angemeldeten Users im LocalStorage
-    this.storeJwtToken(token);                                                                      // Speichern des JWT Tokens im LocalStorage
+  private doLoginUser(email: string, token: any) {                                                       // Methode, die angibt, dass der Benutzer angemeldet ist
+    this.loggedUser = email;                                                                             // Speichern des angemeldeten Users im LocalStorage
+    this.storeJwtToken(token);                                                                           // Speichern des JWT Tokens im LocalStorage
     this.isAuthenticated.next(true);                                                                     // BehaviorSubject, der angibt, dass der Benutzer angemeldet ist
   }
   private storeJwtToken(token: string) {                                                                  // Methode, die den JWT Token im LocalStorage speichert
@@ -34,16 +35,12 @@ constructor(private http: HttpClient) {}
   logout() {                                                                                              // Methode, die den Benutzer abmeldet
     localStorage.removeItem(this.JWT_TOKEN);                                                              // Removen des JWT Tokens aus dem LocalStorage
     this.isAuthenticated.next(false);                                                                     // BehaviorSubject, der angibt, dass der Benutzer nicht angemeldet ist
+    this.Router.navigate(['/app-login']);                                                                  // Navigation zur Login-Seite
   }
-    getCurrentAuthUser(): Observable<any> {
-    if (typeof localStorage === 'undefined') {
-      // Alternative Logik oder Rückgabe eines Fehlers
-      console.error('localStorage is not available');
-      return new Observable(observer => {
-        observer.error('localStorage is not available2');
-      });
-    }
-    let token = localStorage.getItem(this.JWT_TOKEN);
-    return this.http.get('https://dummyjson.com/auth/me');
+    getCurrentAuthUser(): Observable<any> {                                                               // Observable, der angibt, ob der Benutzer angemeldet ist
+    return this.http.get('https://api.escuelajs.co/api/v1/auth/profile');
+  }
+  isLoggedIn() {                                                                                          // Methode, die angibt, ob der Benutzer angemeldet ist
+    return !!localStorage.getItem('JWT_TOKEN');                                                           // Prüfen, ob der JWT Token im LocalStorage vorhanden ist
   }
 }
