@@ -32,10 +32,7 @@ constructor() {}
     this.isAuthenticated.next(true);                                                                     // BehaviorSubject, der angibt, dass der Benutzer angemeldet ist
   }
   private storeJwtToken(jwt: string) {                                                                   // Methode, die den JWT Token im LocalStorage speichert
-   localStorage.setItem(this.JWT_TOKEN, jwt);
-    // if (typeof localStorage !== 'undefined') {                                                         // Prüfen, ob der LocalStorage verfügbar ist
-    //   localStorage.setItem(this.JWT_TOKEN, jwt);                                                       // Speichern des JWT Tokens im LocalStorage
-    // }
+   localStorage.setItem(this.JWT_TOKEN, jwt);                                                            // Speichern des JWT Tokens im LocalStorage
   }
   logout() {                                                                                              // Methode, die den Benutzer abmeldet
     localStorage.removeItem(this.JWT_TOKEN);                                                              // Removen des JWT Tokens aus dem LocalStorage
@@ -70,7 +67,7 @@ constructor() {}
     tokens = JSON.parse(tokens);                                                                           // Parsen des JWT Tokens
     let refreshToken = localStorage.getItem('refresh_token');                                              // Auslesen des Refresh Tokens aus dem LocalStorage
     return this.http                                                                                       // Verwendung der HttpClient-Klasse und des Post-Requests
-      .post<any>('https://api.escuelajs.co/api/v1/auth/token/refresh',{                                    // Post-Request, um den Refresh-Token zu aktualisieren
+      .post<any>('https://api.escuelajs.co/api/v1/auth/refresh-token',{                                    // Post-Request, um den Refresh-Token zu aktualisieren
         refreshToken,                                                                                      // Setzen des Refresh Tokens im Body des Requests
       }) 
       .pipe(
