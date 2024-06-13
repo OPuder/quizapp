@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
      // console.log('Dies ist keine Browser-Umgebung.');                                                            // Ausgabe, wenn es keine Browser-Umgebung ist
     }
   }
-  logout() {
-    this.authService.logout();
+  logout() {                                                                                                      // Methode, die den Benutzer abmeldet
+    this.authService.logout();                                                                                    // Aufruf der logout-Methode
 }
 }
 

@@ -27,22 +27,22 @@ export class ScoreBoardComponent{
     }
   }
 // TEST  FUNCTIONS 
-authService = inject(AuthService);
-user?: any;
+authService = inject(AuthService);                                      // Inject der AuthService-Klasse
+user?: any;                                                             // Variable zum Speichern des aktuellen Benutzers
 
-constructor() {
-  this.authService.getCurrentAuthUser().subscribe((r) => {
-    console.log(r);
-    this.user = r;
+constructor() {                                                         // Konstruktor
+  this.authService.getCurrentAuthUser().subscribe((r) => {              // Subscribe zum aktualisieren des aktuellen Benutzers  
+    console.log(r);                                                     // Ausgabe in der Konsole
+    this.user = r;                                                      // Speichern des aktuellen Benutzers
   });
 }
 
-logout() {
-  this.authService.logout();
+logout() {                                                              // Methode, die den Benutzer abmeldet
+  this.authService.logout();                                            // Aufruf der logout-Methode
 }
 
-  refreshToken() {
-    this.authService.refreshToken()?.subscribe(() => {});
+  refreshToken() {                                                     // Methode, die den Refresh-Token aktualisiert
+    this.authService.refreshToken()?.subscribe(() => {});              // Aufruf der refreshToken-Methode mit der subscribe-Methode 
   }
 // TEST FUNCTIONS
  };

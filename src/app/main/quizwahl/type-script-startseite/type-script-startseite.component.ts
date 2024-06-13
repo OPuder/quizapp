@@ -12,10 +12,10 @@ import { QuizlogicService } from '../../../quiz/quizlogic.service';
 })
 export class TypeScriptStartseiteComponent {
 
-  constructor(private QuizlogicService: QuizlogicService) {}
+  constructor(private QuizlogicService: QuizlogicService) {}                 // Konstruktor der TypeScriptStartseite-Klasse, der den FragenArrayService als Abhängigkeit injiziert
 
-  toggleQuiz(selectedCase: number) {
-    this.QuizlogicService.toggleQuiz(selectedCase);
+  toggleQuiz(selectedCase: number) {                                         // Methode zum Umschalten des Quiz
+    this.QuizlogicService.toggleQuiz(selectedCase);                          // Wechselt den Zustand des Quiz (Anzeigen/Ausblenden)
    }
 
 }

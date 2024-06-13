@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';                                     
 import { TranslationService } from '../translation-service.service';                            // Import der TranslationService
 import { map } from 'rxjs/operators';                                                          // Import von map aus rxjs
 import { Fragen } from './fragen';                                                             // Import der Fragen-Schnittstelle
-import { testFragen } from '../../assets/TestFragen';                                             // Import von Testfragen
-import { jMidd } from '../../assets/JavaScriptMittel';                                            // Import von JavaScript-Mittelstufe-Fragen
-import { jEasy } from '../../assets/JavaScriptLeicht';                                            // Import von JavaScript-Leicht-Fragen
-import { jHard } from '../../assets/JavaScriptSchwer';                                            // Import von JavaScript-Schwer-Fragen
-import { jZufall } from '../../assets/JavaScriptZufall';                                          // Import von zufälligen JavaScript-Fragen
-import { tEasy } from '../../assets/TypeScriptLeicht';                                            // Import von TypeScript-Leicht-Fragen
-import { tMidd } from '../../assets/TypeScriptMittel';                                            // Import von TypeScript-Mittelstufe-Fragen
-import { tHard } from '../../assets/TypeScriptSchwer';                                            // Import von TypeScript-Schwer-Fragen
-import { tZufall } from '../../assets/TypeScriptZufall';                                          // Import von zufälligen TypeScript-Fragen
-import { aEasy } from '../../assets/AngularLeicht';                                               // Import von Angular-Leicht-Fragen
-import { aMidd } from '../../assets/AngularMittel';                                               // Import von Angular-Mittelstufe-Fragen
-import { aHard } from '../../assets/AngularSchwer';                                               // Import von Angular-Schwer-Fragen
-import { aZufall } from '../../assets/AngularZufall';                                             // Import von zufälligen Angular-Fragen
+import { testFragen } from '../../assets/TestFragen';                                          // Import von Testfragen
+import { jMidd } from '../../assets/JavaScriptMittel';                                         // Import von JavaScript-Mittelstufe-Fragen
+import { jEasy } from '../../assets/JavaScriptLeicht';                                         // Import von JavaScript-Leicht-Fragen
+import { jHard } from '../../assets/JavaScriptSchwer';                                         // Import von JavaScript-Schwer-Fragen
+import { jZufall } from '../../assets/JavaScriptZufall';                                       // Import von zufälligen JavaScript-Fragen
+import { tEasy } from '../../assets/TypeScriptLeicht';                                         // Import von TypeScript-Leicht-Fragen
+import { tMidd } from '../../assets/TypeScriptMittel';                                         // Import von TypeScript-Mittelstufe-Fragen
+import { tHard } from '../../assets/TypeScriptSchwer';                                         // Import von TypeScript-Schwer-Fragen
+import { tZufall } from '../../assets/TypeScriptZufall';                                       // Import von zufälligen TypeScript-Fragen
+import { aEasy } from '../../assets/AngularLeicht';                                            // Import von Angular-Leicht-Fragen
+import { aMidd } from '../../assets/AngularMittel';                                            // Import von Angular-Mittelstufe-Fragen
+import { aHard } from '../../assets/AngularSchwer';                                            // Import von Angular-Schwer-Fragen
+import { aZufall } from '../../assets/AngularZufall';                                          // Import von zufälligen Angular-Fragen
 
 //import { qSnipped } from '../assets/QuizSnipped';                                            // Import des Quiz-Snippets mit Fragen
 @Injectable({                                                                                  // Injectable-Klasse
@@ -186,8 +186,8 @@ export class QuizlogicService {                                                 
   }
   nextFrage() {                                                                                // Methode zum Überspringen der aktuellen Frage
     try {
-      if (!this.Fragen[this.aktuelleFrageIndex].uebersprungen) {                                        // Überprüfen, ob die aktuelle Frage bereits übersprungen wurde
-        this.Fragen[this.aktuelleFrageIndex].uebersprungen = true;                                      // Falls nicht, markiere die Frage als übersprungen (skipped auf true setzen)
+      if (!this.Fragen[this.aktuelleFrageIndex].uebersprungen) {                               // Überprüfen, ob die aktuelle Frage bereits übersprungen wurde
+        this.Fragen[this.aktuelleFrageIndex].uebersprungen = true;                             // Falls nicht, markiere die Frage als übersprungen (skipped auf true setzen)
         this.unbeantworteteFragen.push(this.Fragen[this.aktuelleFrageIndex]);                  // Füge die Frage zur Liste der nicht beantworteten Fragen hinzu
         console.log("Skip Fragen Array", this.unbeantworteteFragen);                           // Zeige die Liste der nicht beantworteten Fragen in der Konsole an
       }
