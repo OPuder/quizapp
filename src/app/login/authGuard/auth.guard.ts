@@ -14,7 +14,6 @@ export const authGuard: CanActivateFn = (route, state) => {                     
     routerService.navigate(['/app-login']);                                                    // Navigation zur Login-Seite
     return false;                                                                              // False zurückgeben und Route nicht erlaubt
   }
-
   console.log('Benutzer ist eingeloggt, Zugang zur Route erlaubt');                           // Ausgabe in der Console, dass der Benutzer angemeldet ist und Zugang erlaubt
   return true;                                                                                // True zurückgeben und Route erlaubt
 };

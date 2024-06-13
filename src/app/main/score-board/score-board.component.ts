@@ -44,5 +44,8 @@ export class ScoreBoardComponent  implements OnDestroy{
       this.userSubscription.unsubscribe();
     }
   }
+  refrechToken() {
+    this.authService.refreschToken()?.subscribe((token) => {});
+  }
 // TEST FUNCTIONS
  };
