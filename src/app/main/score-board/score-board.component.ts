@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../login/AuthService/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-score-board',
@@ -10,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './score-board.component.html',
   styleUrl: './score-board.component.css'
 })
-export class ScoreBoardComponent  implements OnDestroy{
+export class ScoreBoardComponent{
 
   players = [
     { name: 'TestPerson', score: 0 },
@@ -28,24 +27,22 @@ export class ScoreBoardComponent  implements OnDestroy{
     }
   }
 // TEST  FUNCTIONS 
-  user: any;
-  userSubscription: Subscription;
+authService = inject(AuthService);
+user?: any;
 
-  constructor(private authService: AuthService) {
-    this.user = null; // Initialisierung des Benutzers
-    this.userSubscription = this.authService.getCurrentAuthUser().subscribe((user) => {
-      this.user = user;
-    });
-  }
+constructor() {
+  this.authService.getCurrentAuthUser().subscribe((r) => {
+    console.log(r);
+    this.user = r;
+  });
+}
 
-  ngOnDestroy() {
-    // Unsubscription, um Speicherlecks zu vermeiden
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
-  }
-  refrechToken() {
-    this.authService.refreschToken()?.subscribe((token) => {});
+logout() {
+  this.authService.logout();
+}
+
+  refreshToken() {
+    this.authService.refreshToken()?.subscribe(() => {});
   }
 // TEST FUNCTIONS
  };

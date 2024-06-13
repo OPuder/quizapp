@@ -17,7 +17,7 @@ private http = inject(HttpClient);
 
 constructor() {}
 
-  login(user:{email:string, password:string}):Observable<any> {                                          // Observable der angibt, dass der Benutzer angemeldet ist          
+  login(user:{email:string; password:string}):Observable<any> {                                          // Observable der angibt, dass der Benutzer angemeldet ist          
     return this.http
       .post('https://api.escuelajs.co/api/v1/auth/login', user)                                          // Verwendung der HttpClient-Klasse und des Post-Requests
       .pipe(                                                                                             // Verwendung der Pipe-Methode, um das Observable zu transformieren
@@ -59,20 +59,20 @@ constructor() {}
       const now = new Date().getTime();                                                                    // Auslesen der aktuellen Zeit
       return expirationDate < now;                                                                         // Ueberpruefen, ob die Verfallszeit des JWT Tokens abgelaufen ist                                                           
     }
-  refreschToken() {                                                                                        // Methode, die den JWT Token aktualisiert
+  refreshToken() {                                                                                        // Methode, die den JWT Token aktualisiert
     let tokens: any = localStorage.getItem(this.JWT_TOKEN);                                                // Auslesen des JWT Tokens aus dem LocalStorage
     if (!tokens) {
       return;                                                                                              // Wenn der LocalStorage nicht verfügbar ist, wird nichts zurückgeliefert
     }
     tokens = JSON.parse(tokens);                                                                           // Parsen des JWT Tokens
-    let refreshToken = localStorage.getItem('refresh_token');                                              // Auslesen des Refresh Tokens aus dem LocalStorage
+    let refreshToken = tokens.refresh_token;                                                               // Auslesen des Refresh Tokens aus dem JWT Token
     return this.http                                                                                       // Verwendung der HttpClient-Klasse und des Post-Requests
       .post<any>('https://api.escuelajs.co/api/v1/auth/refresh-token',{                                    // Post-Request, um den Refresh-Token zu aktualisieren
         refreshToken,                                                                                      // Setzen des Refresh Tokens im Body des Requests
       }) 
       .pipe(
-        tap((tokens: any) =>                                                                              // Verwendung der tap-Methode, um die Tokens zu speichern
-          this.storeJwtToken(JSON.stringify(tokens))                                                      // Aufruf der Methode, die angibt, dass der Benutzer angemeldet ist
+        tap((tokens: any) =>                                                                               // Verwendung der tap-Methode, um die Tokens zu speichern
+          this.storeJwtToken(JSON.stringify(tokens))                                                       // Aufruf der Methode, die angibt, dass der Benutzer angemeldet ist
         )
       );
   }

@@ -25,7 +25,7 @@ export class LoginComponent {
      password: this.password                                                             // Verwendung der password-Properties
    })
    .subscribe(() => {                                                                    // Verwendung der subscribe-Methode
-    alert('Login successful');                                                           // Verwendung der alert-Methode zum bestätigen der Anmeldung
+    // alert('Login successful');                                                           // Verwendung der alert-Methode zum bestätigen der Anmeldung
     this.router.navigate(['/app-score-board']);                                          // Verwendung der navigate-Methode zum Wechsel zur Score-Board-Seite
    });
   }
